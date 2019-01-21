@@ -11,6 +11,7 @@
 #include "interfejs_przygotowanie.h"
 #include "interfejs_ruch.h"
 #include "interfejs_bariery.h"
+//#include "main.h"
 
 #define MAKS_DL_TEKSTU 100
 
@@ -26,14 +27,13 @@ static void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
 
 const unsigned short int ilosc_barier = 208;
 
-void pokazBlad(char *komunikat)
+gboolean moj_ruch = false;
+
+struct pozycja
 {
-    GtkWidget *dialog;
-    dialog = gtk_message_dialog_new(GTK_WINDOW(okno_gry), GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "%s", komunikat);
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
-}
+    unsigned int x;
+    unsigned int y;
+};
 
 int main(int argc, char *argv[])
 {
@@ -41,13 +41,15 @@ int main(int argc, char *argv[])
         return 1;
     if (argc == 2 && strcmp(argv[1], "A") == 0)
     {
-        twoj_id = "B > ";
-        moj_id = "A > ";
+        moj_id = "A";
+        twoj_id = "B";
+        moj_ruch = true;
     }
     else
     {
-        moj_id = "B > ";
-        twoj_id = "A > ";
+        moj_id = "B";
+        twoj_id = "A";
+        moj_ruch = false;
     }
 
     gtk_init(&argc, &argv);
@@ -68,34 +70,33 @@ int main(int argc, char *argv[])
     gtk_grid_set_row_homogeneous(GTK_GRID(siatka_okna), TRUE);
     gtk_grid_set_column_homogeneous(GTK_GRID(siatka_okna), TRUE);
     gtk_container_add(GTK_CONTAINER(okno_gry), siatka_okna);
-
-    //GtkWidget *button=gtk_button_new_with_label("koniec");
-    
-    //GtkWidget wszystkie_guziki[9][9];
     
     GtkWidget *wszystkie_guziki[9][9]; //[x][y]
     GtkWidget *wszystkie_bariery[ilosc_barier];
+    
+//    unsigned int pozycja_gracza_x = 4, pozycja_gracza_y = 8;
+//    unsigned int pozycja_przeciwnika_x = 4, pozycja_przeciwnika_y = 0;
 
+    struct pozycja pozycja_gracza;
+    pozycja_gracza.x = 4;
+    pozycja_gracza.y = 8;
+    struct pozycja pozycja_przeciwnika;
+    pozycja_przeciwnika.x = 4;
+    pozycja_przeciwnika.y = 0;
+    
     rysowanie_interfejsu(wszystkie_guziki, wszystkie_bariery, siatka_okna);
 
-    unsigned int pozycja_gracza_x = 4, pozycja_gracza_y = 4;
-    char etykieta_gracza[10] = "G";
-    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[pozycja_gracza_x][pozycja_gracza_y]), etykieta_gracza);
-
-    wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza_x, pozycja_gracza_y);
-    uaktywnij_bariery(wszystkie_bariery, ilosc_barier);
-
-    //GtkWidget *super_boks = gtk_event_box_new ();
-    //gtk_widget_set_name(super_boks, "boksik");
-
-    //char literka[10] = "sie";
-    //    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[4][0]), literka);
-
-    //    gtk_grid_attach(GTK_GRID(siatka_okna), super_boks, 10, 1, 1, 1);
-
-    //    gtk_grid_attach(<#GtkGrid *grid#>, <#GtkWidget *child#>, <#gint left#>, <#gint top#>, <#gint width#>, <#gint height#>)
-
-    //gtk_button_set_label(pole4, "P");
+    wyswietl_przeciwnika(wszystkie_guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
+    wyswietl_gracza(wszystkie_guziki, pozycja_gracza.x, pozycja_gracza.y);
+    
+//    g_timeout_add(100,pobierz_tekst,NULL);
+    
+    if(moj_ruch)
+    {
+//        pozycja_gracza = wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
+        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
+    }
+    
 
     //g_timeout_add(100,pobierz_tekst,NULL);
 
@@ -136,6 +137,15 @@ static void zakoncz_dzialanie(GtkWidget *widget, gpointer data)
 {
     closePipes(potoki);
     gtk_main_quit();
+}
+
+void pokazBlad(char *komunikat)
+{
+    GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(okno_gry), GTK_DIALOG_DESTROY_WITH_PARENT,
+                                    GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "%s", komunikat);
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
 }
 
 //    bufor = (GtkWidget *)gtk_text_buffer_new (NULL);

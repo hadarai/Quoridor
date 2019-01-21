@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 #include "wydarzenia.h"
+//#include "main.h"
 
 struct dane_o_ruchu_w_prawo
 {
@@ -46,6 +47,10 @@ static void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
 static void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
 static void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
 
+//struct pozycja wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y);
 void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y);
+
+void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
+void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
 
 #endif /* interfejs_ruch_h */
