@@ -13,7 +13,7 @@
 #include <gtk/gtk.h>
 #include <stdbool.h>
 
-bool czy_podlaczac_beriere(unsigned int i_wiersz, unsigned int j_kolumna);
+bool czy_niepuste_pole(unsigned int i_wiersz, unsigned int j_kolumna);
 bool czy_klasc_guzik(unsigned int i_wiersz, unsigned int j_kolumna);
 
 void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna);

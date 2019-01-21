@@ -13,19 +13,39 @@
 #include <gtk/gtk.h>
 #include "wydarzenia.h"
 
-struct dane_o_ruchu
+struct dane_o_ruchu_w_prawo
 {
-    unsigned int na_x;
-    unsigned int na_y;
-    unsigned int z_x;
-    unsigned int z_y;
-    //GtkWidget *wszystkie_guziki[9][9];
+    int na_x;
+    int na_y;
+    GtkWidget *tablica[9][9];
 };
 
+struct dane_o_ruchu_w_lewo
+{
+    int na_x;
+    int na_y;
+    GtkWidget *tablica[9][9];
+};
+
+struct dane_o_ruchu_w_dol
+{
+    int na_x;
+    int na_y;
+    GtkWidget *tablica[9][9];
+};
+
+struct dane_o_ruchu_w_gore
+{
+    int na_x;
+    int na_y;
+    GtkWidget *tablica[9][9];
+};
+
+static void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane);
+static void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
+static void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
+static void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
 
 void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y);
-
-void ruch(struct dane_o_ruchu *dane);
-
 
 #endif /* interfejs_ruch_h */

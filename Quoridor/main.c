@@ -14,6 +14,7 @@
 
 #define MAKS_DL_TEKSTU 100
 
+
 static GtkWidget *okno_gry, *bufor;
 static PipesPtr potoki;
 static char *moj_id, *twoj_id;
@@ -22,6 +23,8 @@ static void przekaz_tekst(GtkWidget *widget, GtkWidget *text);
 static gboolean pobierz_tekst(gpointer data);
 
 static void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
+
+const unsigned short int ilosc_barier = 208;
 
 void pokazBlad(char *komunikat)
 {
@@ -67,18 +70,20 @@ int main(int argc, char *argv[])
     gtk_container_add(GTK_CONTAINER(okno_gry), siatka_okna);
 
     //GtkWidget *button=gtk_button_new_with_label("koniec");
-
+    
+    //GtkWidget wszystkie_guziki[9][9];
+    
     GtkWidget *wszystkie_guziki[9][9]; //[x][y]
-    GtkWidget *wszystkie_bariery[208];
+    GtkWidget *wszystkie_bariery[ilosc_barier];
 
     rysowanie_interfejsu(wszystkie_guziki, wszystkie_bariery, siatka_okna);
 
-    unsigned int pozycja_gracza_x = 4, pozycja_gracza_y = 8;
-    char etykieta_gracza[10] = "P";
+    unsigned int pozycja_gracza_x = 4, pozycja_gracza_y = 4;
+    char etykieta_gracza[10] = "G";
     gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[pozycja_gracza_x][pozycja_gracza_y]), etykieta_gracza);
 
     wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza_x, pozycja_gracza_y);
-    uaktywnij_bariery();
+    uaktywnij_bariery(wszystkie_bariery, ilosc_barier);
 
     //GtkWidget *super_boks = gtk_event_box_new ();
     //gtk_widget_set_name(super_boks, "boksik");

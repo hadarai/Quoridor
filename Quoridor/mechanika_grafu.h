@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "gtk/gtk.h"
 
 //bool* nowa_macierz_sasiedztwa(void);
 

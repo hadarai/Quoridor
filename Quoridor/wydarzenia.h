@@ -10,6 +10,7 @@
 #define wydarzenia_h
 
 #include <stdio.h>
+#include "gtk/gtk.h"
 
 void stalo_sie(void);
 void stalo_sie_bariera(void);

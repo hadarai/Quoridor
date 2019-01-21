@@ -10,7 +10,9 @@
 #define interfejs_bariery_h
 
 #include <stdio.h>
+#include "gtk/gtk.h"
+#include "interfejs_przygotowanie.h"
 
-void uaktywnij_bariery(void);
+void uaktywnij_bariery(GtkWidget *bariery[], const unsigned short int ilosc);
 
 #endif /* interfejs_bariery_h */

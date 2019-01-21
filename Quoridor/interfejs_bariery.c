@@ -8,5 +8,11 @@
 
 #include "interfejs_bariery.h"
 
-void uaktywnij_bariery(void)
-{;}
+
+void uaktywnij_bariery(GtkWidget *bariery[], const unsigned short int ilosc)
+{
+    for(int i=0;i<ilosc;i++)
+    {
+        
+    }
+}
