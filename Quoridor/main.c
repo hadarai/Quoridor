@@ -1,8 +1,17 @@
+//
+//  main.c
+//  Quoridor
+//
+//  Created by Maksymilian Czudziak on 14/01/2019.
+//  Copyright © 2019 Maksymilian Czudziak. All rights reserved.
+//
+
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "fifo.h"
 #include "mechanika_grafu.h"
@@ -15,7 +24,6 @@
 
 #define MAKS_DL_TEKSTU 100
 
-
 static GtkWidget *okno_gry, *bufor;
 static PipesPtr potoki;
 static char *moj_id, *twoj_id;
@@ -27,13 +35,9 @@ static void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
 
 const unsigned short int ilosc_barier = 208;
 
-gboolean moj_ruch = false;
-
-struct pozycja
-{
-    unsigned int x;
-    unsigned int y;
-};
+bool moj_ruch = false;
+struct pozycja pozycja_gracza;
+struct pozycja pozycja_przeciwnika;
 
 int main(int argc, char *argv[])
 {
@@ -70,38 +74,33 @@ int main(int argc, char *argv[])
     gtk_grid_set_row_homogeneous(GTK_GRID(siatka_okna), TRUE);
     gtk_grid_set_column_homogeneous(GTK_GRID(siatka_okna), TRUE);
     gtk_container_add(GTK_CONTAINER(okno_gry), siatka_okna);
-    
+
     GtkWidget *wszystkie_guziki[9][9]; //[x][y]
     GtkWidget *wszystkie_bariery[ilosc_barier];
+    struct pozycja pozycje_guzikow[9][9];
     
-//    unsigned int pozycja_gracza_x = 4, pozycja_gracza_y = 8;
-//    unsigned int pozycja_przeciwnika_x = 4, pozycja_przeciwnika_y = 0;
-
-    struct pozycja pozycja_gracza;
     pozycja_gracza.x = 4;
     pozycja_gracza.y = 8;
-    struct pozycja pozycja_przeciwnika;
     pozycja_przeciwnika.x = 4;
     pozycja_przeciwnika.y = 0;
-    
-    rysowanie_interfejsu(wszystkie_guziki, wszystkie_bariery, siatka_okna);
 
+    rysowanie_interfejsu(wszystkie_guziki, wszystkie_bariery, siatka_okna);
+    podlaczanie_guzikow(wszystkie_guziki, pozycje_guzikow);
+    
     wyswietl_przeciwnika(wszystkie_guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
     wyswietl_gracza(wszystkie_guziki, pozycja_gracza.x, pozycja_gracza.y);
-    
-//    g_timeout_add(100,pobierz_tekst,NULL);
-    
-    if(moj_ruch)
-    {
-//        pozycja_gracza = wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
-        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
-    }
-    
 
-    //g_timeout_add(100,pobierz_tekst,NULL);
+    //    g_timeout_add(100,pobierz_tekst,NULL);
+
+    if (moj_ruch)
+    {
+        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
+        //moj_ruch = false;
+    }
+
+    g_timeout_add(100, pobierz_tekst, NULL);
 
     gtk_widget_show_all(okno_gry);
-    //gtk_widget_grab_focus(okno_gry);
     gtk_main();
     return 0;
 }
@@ -111,6 +110,7 @@ static void przekaz_tekst(GtkWidget *widget, GtkWidget *text)
     gchar wejscie[MAKS_DL_TEKSTU + 5];
 
     sendStringToPipe(potoki, gtk_entry_get_text(GTK_ENTRY(text)));
+    //    sendStringToPipe(potoki, <#const char *data#>)21`120\]
 
     strcpy(wejscie, moj_id);
     strcpy(wejscie + strlen(wejscie), gtk_entry_get_text(GTK_ENTRY(text)));

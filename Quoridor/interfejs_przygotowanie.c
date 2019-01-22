@@ -14,7 +14,7 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie
 {
     unsigned int numer_bariery = 0;
     char numerek_na_guziku[10] = "";
-    
+
     for (int i_wiersz_y = 0; i_wiersz_y < 17; i_wiersz_y++)
     {
         for (int j_kolumna_x = 0; j_kolumna_x < 17; j_kolumna_x++)
@@ -24,25 +24,34 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie
                 int x_guzika = j_kolumna_x / 2;
                 int y_guzika = i_wiersz_y / 2;
                 wszystkie_guziki[x_guzika][y_guzika] = gtk_button_new();
-                
-//                sprintf(numerek_na_guziku, "x%d y%d", x_guzika, y_guzika);
-                gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x_guzika][y_guzika]),numerek_na_guziku);
-                
-//                g_signal_connect(wszystkie_guziki[x_guzika][y_guzika], "clicked", G_CALLBACK(stalo_sie), NULL);
+
+                gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x_guzika][y_guzika]), numerek_na_guziku);
                 gtk_grid_attach(GTK_GRID(siatka_okna), wszystkie_guziki[x_guzika][y_guzika], j_kolumna_x, i_wiersz_y, 1, 1);
             }
             else
             {
                 numer_bariery++;
                 wszystkie_bariery[numer_bariery] = gtk_event_box_new();
-                
                 if (czy_niepuste_pole(j_kolumna_x, i_wiersz_y))
                 {
                     g_signal_connect(G_OBJECT(wszystkie_bariery[numer_bariery]), "button_press_event", G_CALLBACK(stalo_sie_bariera), NULL);
                 }
-                
+
                 gtk_grid_attach(GTK_GRID(siatka_okna), wszystkie_bariery[numer_bariery], j_kolumna_x, i_wiersz_y, 1, 1);
             }
+        }
+    }
+}
+
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja *pozycje_guzikow[][9])
+{
+    for (int i_wiersz_y = 0; i_wiersz_y < 9; i_wiersz_y++)
+    {
+        for (int j_kolumna_x = 0; j_kolumna_x < 9; j_kolumna_x++)
+        {
+            pozycje_guzikow[j_kolumna_x][i_wiersz_y]->x = j_kolumna_x;
+            pozycje_guzikow[j_kolumna_x][i_wiersz_y]->y = i_wiersz_y;
+            g_signal_connect(wszystkie_guziki[j_kolumna_x][i_wiersz_y], "clicked", G_CALLBACK(ruch), (gpointer)&pozycje_guzikow[j_kolumna_x][i_wiersz_y]);
         }
     }
 }

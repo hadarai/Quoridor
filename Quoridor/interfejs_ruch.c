@@ -13,56 +13,82 @@ struct dane_o_ruchu_w_lewo dane_ruchu_lewo;
 struct dane_o_ruchu_w_dol dane_ruchu_dol;
 struct dane_o_ruchu_w_gore dane_ruchu_gora;
 
+extern bool moj_ruch;
+extern struct pozycja pozycja_gracza;
+extern struct pozycja pozycja_przeciwnika;
+
+void ruch(GtkWidget *widget, struct pozycja *pozycja)
+{
+//    pozycja->x = 2;
+    printf("Ruch w prawo na %ux, %uy\n", pozycja->x, pozycja->y);
+    if(!moj_ruch) return;
+    
+//    if(gracz_jest_po_lewej(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y))
+//    {
+//        ruch_lewo(<#GtkWidget *widget#>, <#struct dane_o_ruchu_w_lewo *dane#>)
+//        return;
+//    }
+//    else if(gracz_jest_po_prawej(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y))
+//    {
+//        return;
+//    }
+//    else if(gracz_jest_na_dole(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y))
+//    {
+//        return;
+//    }
+//    else if(gracz_jest_na_gorze(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y))
+//    {
+//        return;
+//    }
+}
+
 char etykieta_pusta[10] = "";
 char etykieta_gracza[10] = "G";
 
-static void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane)
+void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane)
 {
     gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza);        //przesuwam gracza
     gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x - 2][dane->na_y]), etykieta_pusta);     //sprzątam po lewej
     gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x - 1][dane->na_y]), etykieta_pusta);     //sprzątam poprzedniego gracza
     gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x - 1][dane->na_y - 1]), etykieta_pusta); //sprzątam na gorze
     gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x - 1][dane->na_y + 1]), etykieta_pusta); //sprzątam na dole
-    printf("Ruch w prawo na %ux, %uy\n", dane->na_x, dane->na_y);
-//    koniec_tury();
+    //    printf("Ruch w prawo na %ux, %uy\n", dane->na_x, dane->na_y);
+    //    moj_ruch = false;
 }
 
-static void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane)
+void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane)
 {
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza); //przesuwam gracza
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x+2][dane->na_y]),etykieta_pusta); //sprzątam po prawej
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x+1][dane->na_y]),etykieta_pusta); //sprzątam poprzedniego gracza
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x+1][dane->na_y-1]),etykieta_pusta); //sprzątam na gorze
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x+1][dane->na_y+1]),etykieta_pusta); //sprzątam na dole
-    printf("Ruch w lewo na %ux, %uy\n", dane->na_x, dane->na_y);
-//    koniec_tury();
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza);        //przesuwam gracza
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x + 2][dane->na_y]), etykieta_pusta);     //sprzątam po prawej
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x + 1][dane->na_y]), etykieta_pusta);     //sprzątam poprzedniego gracza
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x + 1][dane->na_y - 1]), etykieta_pusta); //sprzątam na gorze
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x + 1][dane->na_y + 1]), etykieta_pusta); //sprzątam na dole
+    //    printf("Ruch w lewo na %ux, %uy\n", dane->na_x, dane->na_y);
+    //    moj_ruch = false;
 }
 
-static void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane)
+void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane)
 {
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza); //przesuwam gracza
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x+1][dane->na_y-1]),etykieta_pusta); //sprzątam po prawej
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y-1]),etykieta_pusta); //sprzątam poprzedniego gracza
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y-2]),etykieta_pusta); //sprzątam na gorze
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x-1][dane->na_y-1]),etykieta_pusta); //sprzątam po lewej
-    printf("Ruch w dol na %ux, %uy\n", dane->na_x, dane->na_y);
-    
-//    koniec_tury();
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza);        //przesuwam gracza
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x + 1][dane->na_y - 1]), etykieta_pusta); //sprzątam po prawej
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y - 1]), etykieta_pusta);     //sprzątam poprzedniego gracza
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y - 2]), etykieta_pusta);     //sprzątam na gorze
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x - 1][dane->na_y - 1]), etykieta_pusta); //sprzątam po lewej
+    //    printf("Ruch w dol na %ux, %uy\n", dane->na_x, dane->na_y);
+    //    moj_ruch = false;
 }
 
-static void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane)
+void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane)
 {
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza); //przesuwam gracza
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x+1][dane->na_y+1]),etykieta_pusta); //sprzątam po prawej
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y+1]),etykieta_pusta); //sprzątam poprzedniego gracza
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y+2]),etykieta_pusta); //sprzątam na dole
-    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x-1][dane->na_y+1]),etykieta_pusta); //sprzątam po lewej
-    printf("Ruch w gore na %ux, %uy\n", dane->na_x, dane->na_y);
-//    koniec_tury();
-//    moj_ruch = false;
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y]), etykieta_gracza);        //przesuwam gracza
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x + 1][dane->na_y + 1]), etykieta_pusta); //sprzątam po prawej
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y + 1]), etykieta_pusta);     //sprzątam poprzedniego gracza
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x][dane->na_y + 2]), etykieta_pusta);     //sprzątam na dole
+    gtk_button_set_label(GTK_BUTTON(dane->tablica[dane->na_x - 1][dane->na_y + 1]), etykieta_pusta); //sprzątam po lewej
+    //    printf("Ruch w gore na %ux, %uy\n", dane->na_x, dane->na_y);
+    //    moj_ruch = false;
 }
 
-//struct pozycja wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y)
 void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y)
 {
     char etykieta_pola_do_ruchu[10] = "M";
@@ -125,20 +151,16 @@ void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget
         dane_ruchu_gora.na_y = y - 1;
         g_signal_connect(wszystkie_guziki[x][y - 1], "clicked", G_CALLBACK(ruch_gora), (gpointer)&dane_ruchu_gora);
     }
-//    struct pozycja pozycja_gracza;
-    
-    //return pozycja_gracza;
 }
 
-void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y)
+void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
 {
     char etykieta_przeciwnika[10] = "P";
     gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_przeciwnika);
 }
 
-void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y)
+void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
 {
     char etykieta_gracza[10] = "G";
     gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_gracza);
 }
-
