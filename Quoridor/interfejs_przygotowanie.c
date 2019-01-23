@@ -43,14 +43,14 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie
     }
 }
 
-void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja *pozycje_guzikow[][9])
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja pozycje_guzikow[][9])
 {
     for (int i_wiersz_y = 0; i_wiersz_y < 9; i_wiersz_y++)
     {
         for (int j_kolumna_x = 0; j_kolumna_x < 9; j_kolumna_x++)
         {
-            pozycje_guzikow[j_kolumna_x][i_wiersz_y]->x = j_kolumna_x;
-            pozycje_guzikow[j_kolumna_x][i_wiersz_y]->y = i_wiersz_y;
+            pozycje_guzikow[j_kolumna_x][i_wiersz_y].x = j_kolumna_x;
+            pozycje_guzikow[j_kolumna_x][i_wiersz_y]. y = i_wiersz_y;
             g_signal_connect(wszystkie_guziki[j_kolumna_x][i_wiersz_y], "clicked", G_CALLBACK(ruch), (gpointer)&pozycje_guzikow[j_kolumna_x][i_wiersz_y]);
         }
     }
