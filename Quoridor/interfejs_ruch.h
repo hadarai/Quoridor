@@ -22,47 +22,54 @@ struct pozycja
     int y;
 };
 
-void ruch(GtkWidget *widget, struct pozycja *pozycja);
-
-struct dane_o_ruchu_w_prawo
+struct pozycja_do_ruchu
 {
-    int na_x;
-    int na_y;
+    int x;
+    int y;
     GtkWidget *tablica[9][9];
 };
 
-struct dane_o_ruchu_w_lewo
-{
-    int na_x;
-    int na_y;
-    GtkWidget *tablica[9][9];
-};
-
-struct dane_o_ruchu_w_dol
-{
-    int na_x;
-    int na_y;
-    GtkWidget *tablica[9][9];
-};
-
-struct dane_o_ruchu_w_gore
-{
-    int na_x;
-    int na_y;
-    GtkWidget *tablica[9][9];
-};
+//void ruch(GtkWidget *widget, struct pozycja *pozycja);
+void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja);
+//struct dane_o_ruchu_w_prawo
+//{
+//    int na_x;
+//    int na_y;
+//    GtkWidget *tablica[9][9];
+//};
+//
+//struct dane_o_ruchu_w_lewo
+//{
+//    int na_x;
+//    int na_y;
+//    GtkWidget *tablica[9][9];
+//};
+//
+//struct dane_o_ruchu_w_dol
+//{
+//    int na_x;
+//    int na_y;
+//    GtkWidget *tablica[9][9];
+//};
+//
+//struct dane_o_ruchu_w_gore
+//{
+//    int na_x;
+//    int na_y;
+//    GtkWidget *tablica[9][9];
+//};
 
 //static void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane);
 //static void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
 //static void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
 //static void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
 
-void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane);
-void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
-void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
-void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
+//void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane);
+//void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
+//void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
+//void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
 
-void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y);
+//void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y);
 
 void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
 void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);

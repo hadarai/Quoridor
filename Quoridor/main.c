@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 
     GtkWidget *wszystkie_guziki[9][9]; //[x][y]
     GtkWidget *wszystkie_bariery[ilosc_barier];
-    struct pozycja pozycje_guzikow[9][9];
+    struct pozycja_do_ruchu pozycje_guzikow[9][9];
     
     pozycja_gracza.x = 4;
     pozycja_gracza.y = 8;
@@ -92,13 +92,13 @@ int main(int argc, char *argv[])
 
     //    g_timeout_add(100,pobierz_tekst,NULL);
 
-    if (moj_ruch)
-    {
-        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
-        //moj_ruch = false;
-    }
+//    if (moj_ruch)
+//    {
+//        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
+//        //moj_ruch = false;
+//    }
 
-    g_timeout_add(100, pobierz_tekst, NULL);
+//    g_timeout_add(100, pobierz_tekst, NULL);
 
     gtk_widget_show_all(okno_gry);
     gtk_main();

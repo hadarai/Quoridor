@@ -7,8 +7,6 @@
 //
 
 #include "interfejs_przygotowanie.h"
-#include "wydarzenia.h"
-#include <stdbool.h>
 
 void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna)
 {
@@ -43,14 +41,21 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie
     }
 }
 
-void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja pozycje_guzikow[][9])
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja_do_ruchu pozycje_guzikow[][9])
 {
     for (int i_wiersz_y = 0; i_wiersz_y < 9; i_wiersz_y++)
     {
         for (int j_kolumna_x = 0; j_kolumna_x < 9; j_kolumna_x++)
         {
             pozycje_guzikow[j_kolumna_x][i_wiersz_y].x = j_kolumna_x;
-            pozycje_guzikow[j_kolumna_x][i_wiersz_y]. y = i_wiersz_y;
+            pozycje_guzikow[j_kolumna_x][i_wiersz_y].y = i_wiersz_y;
+            for(int i=0;i<9;i++)
+            {
+                for (int j=0; j<9; j++)
+                {
+                    pozycje_guzikow[j_kolumna_x][i_wiersz_y].tablica[i][j] = wszystkie_guziki[i][j];
+                }
+            }
             g_signal_connect(wszystkie_guziki[j_kolumna_x][i_wiersz_y], "clicked", G_CALLBACK(ruch), (gpointer)&pozycje_guzikow[j_kolumna_x][i_wiersz_y]);
         }
     }

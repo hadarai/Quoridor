@@ -13,6 +13,7 @@
 #include <gtk/gtk.h>
 #include <stdbool.h>
 #include "interfejs_ruch.h"
+#include "wydarzenia.h"
 
 //struct pozycja
 //{
@@ -25,6 +26,7 @@ bool czy_klasc_guzik(unsigned int i_wiersz, unsigned int j_kolumna);
 
 void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna);
 
-void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja pozycje_guzikow[][9]);
+//void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja pozycje_guzikow[][9]);
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja_do_ruchu pozycje_guzikow[][9]);
 
 #endif /* interfejs_przygotowanie_h */
