@@ -31,46 +31,12 @@ struct pozycja_do_ruchu
 
 //void ruch(GtkWidget *widget, struct pozycja *pozycja);
 void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja);
-//struct dane_o_ruchu_w_prawo
-//{
-//    int na_x;
-//    int na_y;
-//    GtkWidget *tablica[9][9];
-//};
-//
-//struct dane_o_ruchu_w_lewo
-//{
-//    int na_x;
-//    int na_y;
-//    GtkWidget *tablica[9][9];
-//};
-//
-//struct dane_o_ruchu_w_dol
-//{
-//    int na_x;
-//    int na_y;
-//    GtkWidget *tablica[9][9];
-//};
-//
-//struct dane_o_ruchu_w_gore
-//{
-//    int na_x;
-//    int na_y;
-//    GtkWidget *tablica[9][9];
-//};
 
-//static void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane);
-//static void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
-//static void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
-//static void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
-
-//void ruch_prawo(GtkWidget *widget, struct dane_o_ruchu_w_prawo *dane);
-//void ruch_lewo(GtkWidget *widget, struct dane_o_ruchu_w_lewo *dane);
-//void ruch_dol(GtkWidget *widget, struct dane_o_ruchu_w_dol *dane);
-//void ruch_gora(GtkWidget *widget, struct dane_o_ruchu_w_gore *dane);
-
-//void wyswietl_pola_dostepne_do_ruchu(GtkWidget *wszystkie_guziki[][9], GtkWidget *wszystkie_bariery[], GtkWidget *siatka_okna, unsigned int x, unsigned int y);
-
+bool czy_to_bedzie_w_prawo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_lewo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_gore(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_dol(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
+te
 void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
 void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
 
