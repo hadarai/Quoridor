@@ -36,7 +36,7 @@ bool czy_to_bedzie_w_prawo(int pozycja_guzika_x, int pozycja_guzika_y, int pozyc
 bool czy_to_bedzie_w_lewo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
 bool czy_to_bedzie_w_gore(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
 bool czy_to_bedzie_w_dol(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
-te
+
 void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
 void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
 

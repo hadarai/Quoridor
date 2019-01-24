@@ -56,7 +56,7 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
         pozycja_gracza.y = pozycja->y;
     }
 
-    if (czy_to_bedzie_w_prawo(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
+    if (czy_to_bedzie_w_dol(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
