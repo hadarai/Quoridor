@@ -11,10 +11,9 @@
 
 #include <stdio.h>
 #include <gtk/gtk.h>
-#include "wydarzenia.h"
+#include "komunikacja.h"
 #include <stdbool.h>
 //#include "main.h"
-
 
 struct pozycja
 {
@@ -27,17 +26,20 @@ struct pozycja_do_ruchu
     int x;
     int y;
     GtkWidget *tablica[9][9];
+    PipesPtr potoki;
 };
 
 //void ruch(GtkWidget *widget, struct pozycja *pozycja);
 void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja);
 
-bool czy_to_bedzie_w_prawo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
-bool czy_to_bedzie_w_lewo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
-bool czy_to_bedzie_w_gore(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
-bool czy_to_bedzie_w_dol(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x,int pozycja_gracza_y,int pozycja_przeciwnika_x,int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_prawo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x, int pozycja_gracza_y, int pozycja_przeciwnika_x, int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_lewo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x, int pozycja_gracza_y, int pozycja_przeciwnika_x, int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_gore(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x, int pozycja_gracza_y, int pozycja_przeciwnika_x, int pozycja_przeciwnika_y);
+bool czy_to_bedzie_w_dol(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x, int pozycja_gracza_y, int pozycja_przeciwnika_x, int pozycja_przeciwnika_y);
 
-void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
-void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9],unsigned int x, unsigned int y);
+void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y);
+void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y);
+
+void ruch_przeciwnika(int x, int y);
 
 #endif /* interfejs_ruch_h */

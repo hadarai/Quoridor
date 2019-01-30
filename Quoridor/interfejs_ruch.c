@@ -22,12 +22,11 @@ char etykieta_gracza[10] = "G";
 
 void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
 {
+    //    sendStringToPipe(pozycja->potoki, "trzy");
     printf("Gracz jest na: %ux %uy. Ruch na %ux, %uy\n", pozycja_gracza.x, pozycja_gracza.y, pozycja->x, pozycja->y);
-//    printf("Gracz jest na: %ux %uy. Ruch na %ux, %uy\n", pozycja_gracza.x, pozycja_gracza.y, pozycja->x, pozycja->y);
+    //    printf("Gracz jest na: %ux %uy. Ruch na %ux, %uy\n", pozycja_gracza.x, pozycja_gracza.y, pozycja->x, pozycja->y);
     if (!moj_ruch)
         return;
-
-    
 
     //rozwazam czy to bedzie ruch w lewo
     if (czy_to_bedzie_w_prawo(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
@@ -37,7 +36,8 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
-
+        moj_ruch = false;
+        wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
 
     if (czy_to_bedzie_w_lewo(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
@@ -46,6 +46,8 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        moj_ruch = false;
+        wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
 
     if (czy_to_bedzie_w_gore(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
@@ -54,6 +56,8 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        moj_ruch = false;
+        wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
 
     if (czy_to_bedzie_w_dol(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
@@ -62,9 +66,9 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        moj_ruch = false;
+        wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
-    
-    
 
     return;
 }
@@ -74,10 +78,10 @@ bool czy_to_bedzie_w_prawo(int pozycja_guzika_x, int pozycja_guzika_y, int pozyc
     if (pozycja_guzika_x == pozycja_gracza_x + 1 && pozycja_gracza_y == pozycja_guzika_y) // czy to bedzie w lewo o jeden
     {
         return true;
-//        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
-//        {
-//            return true;
-//        }
+        //        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
+        //        {
+        //            return true;
+        //        }
     }
     return false;
 }
@@ -86,10 +90,10 @@ bool czy_to_bedzie_w_lewo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycj
     if (pozycja_guzika_x == (pozycja_gracza_x - 1) && pozycja_gracza_y == pozycja_guzika_y)
     {
         return true;
-//        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
-//        {
-//            return true;
-//        }
+        //        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
+        //        {
+        //            return true;
+        //        }
     }
     return false;
 }
@@ -98,10 +102,10 @@ bool czy_to_bedzie_w_gore(int pozycja_guzika_x, int pozycja_guzika_y, int pozycj
     if (pozycja_guzika_x == pozycja_gracza_x && pozycja_gracza_y - 1 == pozycja_guzika_y) // czy to bedzie w lewo o jeden
     {
         return true;
-//        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
-//        {
-//            return true;
-//        }
+        //        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
+        //        {
+        //            return true;
+        //        }
     }
     return false;
 }
@@ -110,13 +114,14 @@ bool czy_to_bedzie_w_dol(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja
     if (pozycja_guzika_x == pozycja_gracza_x && pozycja_gracza_y + 1 == pozycja_guzika_y) // czy to bedzie w lewo o jeden
     {
         return true;
-//        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
-//        {
-//            return true;
-//        }
+        //        if (pozycja_przeciwnika_x != pozycja_guzika_x && pozycja_przeciwnika_y != pozycja_guzika_y) // czy nie ma tam przeciwnika
+        //        {
+        //            return true;
+        //        }
     }
     return false;
 }
+
 void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
 {
     char etykieta_przeciwnika[10] = "P";
@@ -127,4 +132,19 @@ void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned 
 {
     char etykieta_gracza[10] = "G";
     gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_gracza);
+}
+
+void ruch_przeciwnika(int x, int y)
+{
+    extern GtkWidget *wszystkie_guziki[9][9];
+    extern struct pozycja pozycja_przeciwnika;
+    char etykieta_przeciwnika[10] = "P";
+    char etykieta_pusta[10] = "";
+    
+    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[pozycja_przeciwnika.x][pozycja_przeciwnika.y]), etykieta_pusta);
+    
+    pozycja_przeciwnika.x = x;
+    pozycja_przeciwnika.y = y;
+    
+    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_przeciwnika);
 }

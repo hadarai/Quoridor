@@ -75,7 +75,7 @@ static FILE *openInPipe(char *name){
 
 void sendStringToPipe(PipesPtr pipes, const char *data)
 {
-    int result = fprintf(pipes->fifo_out,"%s",data);
+    int result = fprintf(pipes->fifo_out,"%s",data); // problem
     fflush(pipes->fifo_out);
     if (result == 0)
         pokazBlad("Failed to send data");
