@@ -34,15 +34,22 @@ char wiadomosc[6];
 
 static void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
 
-const unsigned short int ilosc_barier = 208;
+const unsigned short int ilosc_barier_pionowych = 72;
+const unsigned short int ilosc_barier_poziomych = 72;
+const unsigned short int ilosc_barier_martwych = 64;
 
 bool moj_ruch = false;
 struct pozycja pozycja_gracza;
 struct pozycja pozycja_przeciwnika;
+bool graf_polaczen_pol[81][81];
 
-GtkWidget *wszystkie_guziki[9][9]; //[x][y]
-GtkWidget *wszystkie_bariery[ilosc_barier];
+GtkWidget *guziki[9][9]; //[x][y]
+GtkWidget *bariery_pionowe[ilosc_barier_pionowych];
+GtkWidget *bariery_poziome[ilosc_barier_poziomych];
+GtkWidget *bariery_martwe[ilosc_barier_martwych];
+
 struct pozycja_do_ruchu pozycje_guzikow[9][9];
+
 
 int main(int argc, char *argv[])
 {
@@ -68,7 +75,8 @@ int main(int argc, char *argv[])
         sprintf(naglowek, "Gracz Pierwszy");
     else
         sprintf(naglowek, "Gracz Drugi");
-
+    uzupelnij_graf(graf_polaczen_pol);
+    //    wypisz_graf(graf_polaczen_pol);
     okno_gry = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(okno_gry), naglowek);
     g_signal_connect(G_OBJECT(okno_gry), "destroy", G_CALLBACK(zakoncz_dzialanie), NULL);
@@ -80,38 +88,36 @@ int main(int argc, char *argv[])
     gtk_grid_set_column_homogeneous(GTK_GRID(siatka_okna), TRUE);
     gtk_container_add(GTK_CONTAINER(okno_gry), siatka_okna);
 
-    
-    
     pozycja_gracza.x = 4;
     pozycja_gracza.y = 8;
     pozycja_przeciwnika.x = 4;
     pozycja_przeciwnika.y = 0;
 
-//    sendStringToPipe(potoki, "raz");
-    
-    rysowanie_interfejsu(wszystkie_guziki, wszystkie_bariery, siatka_okna, potoki);
-    podlaczanie_guzikow(wszystkie_guziki, pozycje_guzikow, potoki);
-    
-    
-    wyswietl_przeciwnika(wszystkie_guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
-    wyswietl_gracza(wszystkie_guziki, pozycja_gracza.x, pozycja_gracza.y);
+    //    sendStringToPipe(potoki, "raz");
 
-//    g_timeout_add(100,pobierz_tekst,NULL);
+    //    rysowanie_interfejsu(guziki, , siatka_okna, potoki);
+    rysowanie_interfejsu(guziki, bariery_pionowe, bariery_poziome, bariery_martwe, siatka_okna, potoki);
 
-//    if (moj_ruch)
-//    {
-//        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
-//        //moj_ruch = false;
-//    }
-    
+    podlaczanie_guzikow(guziki, pozycje_guzikow, potoki);
+//    podlaczanie_barier(bariery_poziome, bariery_pionowe, potoki);
+
+    wyswietl_przeciwnika(guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
+    wyswietl_gracza(guziki, pozycja_gracza.x, pozycja_gracza.y);
+
+    //    g_timeout_add(100,pobierz_tekst,NULL);
+
+    //    if (moj_ruch)
+    //    {
+    //        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
+    //        //moj_ruch = false;
+    //    }
+
     g_timeout_add(100, odczytaj_wiadmosc, potoki);
-    
-//    char wiad[15];
-//    sprintf(wiad, "literki a");
 
-//    printf("%s", "literki a");
+    //    char wiad[15];
+    //    sprintf(wiad, "literki a");
 
-    
+    //    printf("%s", "literki a");
 
     gtk_widget_show_all(okno_gry);
     gtk_main();

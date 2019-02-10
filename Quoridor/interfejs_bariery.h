@@ -18,7 +18,7 @@ struct dane_bariery
 {
     unsigned int x;
     unsigned int y;
-    GtkWidget *tablica[81];
+    GtkWidget *tablica_barier[81];
     PipesPtr potoki;
 };
 
@@ -26,4 +26,7 @@ struct dane_bariery
 //void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
 void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
 
+void bariera_pozioma(GtkWidget *widget);
+void bariera_pionowa(GtkWidget *widget);
+void bariera_martwa(GtkWidget *widget);
 #endif /* interfejs_bariery_h */

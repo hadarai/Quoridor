@@ -8,34 +8,70 @@
 
 #include "mechanika_grafu.h"
 
-//bool* nowa_macierz_sasiedztwa()
-//{
-//    const unsigned int rozmiar_planszy = 81;
-//    const unsigned int rozmiar_macierzy = rozmiar_planszy * rozmiar_planszy;
-//    bool macierz_sasiedztwa[rozmiar_macierzy][rozmiar_macierzy];
-//    for(unsigned int i=1;i < rozmiar_macierzy;i++)
-//    {
-//        for (unsigned int j=1 ;j < rozmiar_macierzy; j++)
-//        {
-//            //z tym po lewej
-//            macierz_sasiedztwa[i][i-1] = true;
-//            macierz_sasiedztwa[i-1][i] = true;
-//
-//            macierz_sasiedztwa[j][j-1] = true;
-//            macierz_sasiedztwa[j-1][j] = true;
-//            //z tym po prawej
-//            macierz_sasiedztwa[i][i+1] = true;
-//            macierz_sasiedztwa[i+1][i] = true;
-//
-//            macierz_sasiedztwa[j][j+1] = true;
-//            macierz_sasiedztwa[j+1][j] = true;
-//            //z tym wyzej
-//
-//
-//            //z tym nizej
-//
-//
-//        }
-//    }
-//    return &macierz_sasiedztwa;
-//}
+void uzupelnij_graf(bool graf[][81])
+{
+    
+    for(int i=0;i<81;i++)
+    {
+        for (int j = 0; j<81; j++)
+        {
+            if(czy_sasiaduja(i,j))
+            {
+                graf[i][j] = 1;
+            }
+            
+        }
+    }
+    
+}
+
+bool czy_sasiaduja(int x, int y)
+{
+    if(x == y) return true;
+    // czy z x da sie dojsc w 1 ruchu do y
+    //sasiad z lewej
+    if (y-1 == x) {
+        return true;
+    }
+    //sasiad z prawej
+    if (y+1 == x) {
+        return true;
+    }
+    //sasiad z gory
+    if (y-9 == x) {
+        return true;
+    }
+    //sasiad z dolu
+    if (y+9 == x) {
+        return true;
+    }
+    return false;
+}
+
+bool czy_moge_przejsc_na_grafie(int x_gracza, int y_gracza, int x_dokad, int y_dokad)
+{
+    extern bool graf_polaczen_pol[81][81];
+    int numer_pola_gracza = ((y_gracza * 9) + x_gracza);
+    int numer_pola_dokad = ((y_dokad * 9) + x_dokad);
+    
+//    printf("%d %d", numer_pola_gracza, numer_pola_dokad );
+    if(graf_polaczen_pol[numer_pola_gracza][numer_pola_dokad])
+    {
+        return true;
+    }
+    return false;
+}
+
+void wypisz_graf(bool graf[][81])
+{
+    
+    for(int i=0;i<81;i++)
+    {
+        for (int j = 0; j<81; j++)
+        {
+            printf("%d ", graf[i][j]);
+        }
+        printf("\n");
+    }
+    
+}

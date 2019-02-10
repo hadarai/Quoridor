@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 #include "komunikacja.h"
+#include "mechanika_grafu.h"
 #include <stdbool.h>
 //#include "main.h"
 

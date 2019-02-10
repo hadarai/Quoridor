@@ -19,7 +19,8 @@
 
 void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera)
 {
-    printf("eloooo");
+    printf("x%d y%d", bariera->x, bariera->y);
+//    printf("eloooo");
     char magia[10];
     
     sprintf(magia, "siemaiu");
@@ -28,4 +29,17 @@ void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera)
     //    printf("%s", wiadomosc);
 //    sendStringToPipe(bariera->potoki, magia);
     
+}
+
+void bariera_pozioma(GtkWidget *widget)
+{
+    printf("jestem pozioma\n");
+}
+void bariera_pionowa(GtkWidget *widget)
+{
+    printf("jestem pionowa\n");
+}
+void bariera_martwa(GtkWidget *widget)
+{
+    printf("jestem martwa\n");
 }

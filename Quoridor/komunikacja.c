@@ -34,6 +34,7 @@ gboolean odczytaj_wiadmosc(gpointer data)
 //    extern PipesPtr potoki;
     PipesPtr potoki = (PipesPtr)data;
     extern bool moj_ruch;
+    extern struct pozycja pozycja_przeciwnika;
     gchar wejscie[10];
     if(getStringFromPipe(potoki, wejscie, 10))
     {
@@ -48,6 +49,7 @@ gboolean odczytaj_wiadmosc(gpointer data)
         }
         printf("odczytalem wiadoamosc");
 //        printf("%s", wejscie);
+        
         moj_ruch = true;
     }
     return TRUE;
