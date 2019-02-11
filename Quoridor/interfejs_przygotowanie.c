@@ -12,7 +12,7 @@ extern struct dane_bariery dane_barier_poziomych[];
 void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_pionowe[], GtkWidget *bariery_poziome[], GtkWidget *bariery_martwe[], GtkWidget *siatka_okna, PipesPtr potoki)
 {
     unsigned int numer_bariery = 0;
-//    char numerek_na_guziku[10] = "";
+    char numerek_na_guziku[10] = "";
     unsigned int licznik_pionowych_barier = 0, licznik_poziomych_barier = 0, licznik_martwych_barier = 0;
 
     for (int i_wiersz_y = 0; i_wiersz_y < 17; i_wiersz_y++)
@@ -26,16 +26,19 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_p
                 wszystkie_guziki[x_guzika][y_guzika] = gtk_button_new();
                 
                 gtk_grid_attach(GTK_GRID(siatka_okna), wszystkie_guziki[x_guzika][y_guzika], j_kolumna_x, i_wiersz_y, 1, 1);
+                
+                sprintf(numerek_na_guziku, "%d", y_guzika*9 + x_guzika);
+                gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x_guzika][y_guzika]),numerek_na_guziku);
+                
             }
             else
             {
                 if (czy_bariera_pionowa(numer_bariery))
                 {
-                    
                     //bariera pionowa
                     bariery_pionowe[licznik_pionowych_barier] = gtk_event_box_new();
                     gtk_grid_attach(GTK_GRID(siatka_okna), bariery_pionowe[licznik_pionowych_barier], j_kolumna_x, i_wiersz_y, 1, 1);
-//                    g_signal_connect(G_OBJECT(bariery_pionowe[licznik_pionowych_barier]), "button_press_event", G_CALLBACK(bariera_pionowa), NULL);
+//                    g_signal_connect(G_OBJECT(bariery_pionowe[licznik_pionowych_barier]), "button_press_event", G_CALLBACK(bariera_pionowa_przedstaw), NULL);
                     licznik_pionowych_barier++;
                 }
 
@@ -45,7 +48,7 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_p
                     //bariera pozioma
                     bariery_poziome[licznik_poziomych_barier] = gtk_event_box_new();
                     gtk_grid_attach(GTK_GRID(siatka_okna), bariery_poziome[licznik_poziomych_barier], j_kolumna_x, i_wiersz_y, 1, 1);
-//                    g_signal_connect(G_OBJECT(bariery_poziome[licznik_poziomych_barier]), "button_press_event", G_CALLBACK(bariery_poziome), NULL);
+//                    g_signal_connect(G_OBJECT(bariery_poziome[licznik_poziomych_barier]), "button_press_event", G_CALLBACK(bariera_pozioma_przedstaw), NULL);
                     licznik_poziomych_barier++;
                 }
 
@@ -55,7 +58,7 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_p
 //                    printf("%d ", licznik_martwych_barier);
                     bariery_martwe[licznik_martwych_barier] = gtk_event_box_new();
                     gtk_grid_attach(GTK_GRID(siatka_okna), bariery_martwe[licznik_martwych_barier], j_kolumna_x, i_wiersz_y, 1, 1);
-//                    g_signal_connect(G_OBJECT(bariery_martwe[licznik_martwych_barier]), "button_press_event", G_CALLBACK(bariery_martwe), NULL);
+//                    g_signal_connect(G_OBJECT(bariery_martwe[licznik_martwych_barier]), "button_press_event", G_CALLBACK(bariera_martwa_przedstaw), NULL);
                     licznik_martwych_barier++;
                 }
                 numer_bariery++;
@@ -101,7 +104,6 @@ void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja_do_ruc
 }
 
 
-//void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[],  GtkWidget *bariery_martwe[], PipesPtr potoki)
 void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[],  GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[],  PipesPtr potoki)
 {
     
@@ -109,10 +111,9 @@ void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe
     extern const unsigned short int ilosc_barier_poziomych;
     extern const unsigned short int ilosc_barier_martwych;
     
-//    extern struct bomba wybuch[];
+    //poziome
     for (int i = 0; i < ilosc_barier_poziomych; i++)
     {
-//        wybuch[i].liczba = i;
         dane_barier_poziomych[i].numer_w_tablicy = i;
         
         for(int j=0;j<ilosc_barier_poziomych;j++)
@@ -127,12 +128,12 @@ void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe
 //        printf("%d", dane_barier_poziomych[i].numer_w_tablicy);
         
         g_signal_connect(G_OBJECT(bariery_poziome[i]), "button_press_event", G_CALLBACK(stawianie_bariery_poziomej), (gpointer)&dane_barier_poziomych[i]);
+//        g_signal_connect(<#instance#>, <#detailed_signal#>, <#c_handler#>, <#data#>)
     }
     
-    
+    //pionowe
     for (int i = 0; i < ilosc_barier_pionowych; i++)
     {
-//        wybuch[i].liczba = i;
         dane_barier_pionowych[i].numer_w_tablicy = i;
         
         for(int j=0;j<ilosc_barier_pionowych;j++)
@@ -147,7 +148,6 @@ void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe
         //        printf("%d", dane_barier_poziomych[i].numer_w_tablicy);
         
         g_signal_connect(G_OBJECT(bariery_pionowe[i]), "button_press_event", G_CALLBACK(stawianie_bariery_pionowej), (gpointer)&dane_barier_pionowych[i]);
-        //        g_signal_connect(bariery_poziome[i], "button_press_event", G_CALLBACK(bariera_pionowa), NULL);
     }
     
 }

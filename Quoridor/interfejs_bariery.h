@@ -14,11 +14,6 @@
 #include "interfejs_przygotowanie.h"
 #include "fifo.h"
 
-struct bomba
-{
-    int liczba;
-};
-
 //struct dane_bariery
 //{
 //    int numer_w_tablicy;
@@ -27,12 +22,16 @@ struct bomba
 //    PipesPtr potoki;
 //};
 
-//void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
-//void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
+extern bool moj_ruch;
 
-void stawianie_bariery_poziomej(GtkWidget *widget, struct bomba *dane_smieszne);
-void stawianie_bariery_pionowej(GtkWidget *widget, struct bomba *dane_smieszne);
+//bool czy_bariera_juz_tu_stoi_pion[72];
+//bool czy_bariera_juz_tu_stoi_poziom[72];
 
-void bariera_pionowa(GtkWidget *widget);
-void bariera_martwa(GtkWidget *widget);
+void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *super_dane);
+void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *super_dane);
+
+void bariera_pozioma_przedstaw(GtkWidget *widget);
+void bariera_pionowa_przedstaw(GtkWidget *widget);
+void bariera_martwa_przedstaw(GtkWidget *widget);
+
 #endif /* interfejs_bariery_h */

@@ -7,38 +7,54 @@
 //
 
 #include "interfejs_bariery.h"
+extern bool moj_ruch;
 
-void stawianie_bariery_poziomej(GtkWidget *widget, struct bomba *dane_smieszne)
+void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *super_dane)
 {
-//    printf("Bariera poziomabe\n");
+//    if(!moj_ruch) return;
     
-//    dane_smieszne->numer_w_tablicy = 10;
-//    printf("jestem %d \n", dane_smieszne->numer_w_tablicy);
+    miedzy_kim_jestes_poziom(super_dane->numer_w_tablicy);
+    
+    
+    
+    
+//    super_dane->numer_w_tablicy = 10;
+    printf("Poziom: %d \n", super_dane->numer_w_tablicy);
+    
+//    GtkWidget *grafika_bariery;
+//    grafika_bariery = gtk_image_new_from_file ("bariera.png");
+//    gtk_container_add (GTK_CONTAINER (super_dane->tablica_barier[super_dane->numer_w_tablicy]), grafika_bariery);
+    
+    moj_ruch = false;
     return;
 }
-void stawianie_bariery_pionowej(GtkWidget *widget, struct bomba *dane_smieszne)
+void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *super_dane)
 {
+//    if(!moj_ruch) return;
+    
 //    printf("Bariera pionowa\n");
     
-    //    extern GtkWidget *bariery_pionowe[];
-    //    GtkWidget *image;
-    //    image = gtk_image_new_from_file ("bariera.png");
-    //    gtk_container_add (GTK_CONTAINER (bariery_pionowe[7]), image);
+//        GtkWidget *grafika_bariery;
+//        grafika_bariery = gtk_image_new_from_file ("bariera.png");
+//        gtk_container_add (GTK_CONTAINER (super_dane->tablica_barier[super_dane->numer_w_tablicy]), grafika_bariery);
     
 //    dane_smieszne->numer_w_tablicy = 10;
-//    printf("jestem %d \n", dane_smieszne->numer_w_tablicy);
+    miedzy_kim_jestes_pion(super_dane->numer_w_tablicy);
+    printf("Pion: %d \n", super_dane->numer_w_tablicy);
+    
+    moj_ruch = false;
     return;
 }
 
-void bariera_pozioma(GtkWidget *widget)
+void bariera_pozioma_przedstaw(GtkWidget *widget)
 {
     printf("jestem pozioma");
 }
-void bariera_pionowa(GtkWidget *widget)
+void bariera_pionowa_przedstaw(GtkWidget *widget)
 {
     printf("jestem pionowa\n");
 }
-void bariera_martwa(GtkWidget *widget)
+void bariera_martwa_przedstaw(GtkWidget *widget)
 {
     printf("jestem martwa\n");
 }

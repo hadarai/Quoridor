@@ -54,7 +54,6 @@ struct dane_bariery dane_barier_poziomych[72];
 struct dane_bariery dane_barier_pionowych[72];
 //struct dane_bariery super_dane;
 
-struct bomba wybuch[72];
 
 
 int main(int argc, char *argv[])
@@ -112,7 +111,9 @@ int main(int argc, char *argv[])
     //    g_timeout_add(100,pobierz_tekst,NULL);
 
     g_timeout_add(100, odczytaj_wiadmosc, potoki);
-
+    GtkWidget *grafika_bariery;
+    grafika_bariery = gtk_image_new_from_file ("bariera.png");
+    gtk_container_add (GTK_CONTAINER (bariery_poziome[2]), grafika_bariery);
 
     gtk_widget_show_all(okno_gry);
     gtk_main();

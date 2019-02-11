@@ -31,6 +31,10 @@ bool czy_mogę_postawic_bariere_pionowo(int numer_bariery_pionowej);
 
 bool DFS(void);
 
+void miedzy_kim_jestes_pion(int numer_bariery);
+void miedzy_kim_jestes_poziom(int numer_bariery);
+
+
 void wypisz_graf(bool graf[][81]);
 
 #endif /* mechanika_h */

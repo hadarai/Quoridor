@@ -34,30 +34,19 @@ void rysowanie_interfejsu(
 struct dane_bariery
 {
     int numer_w_tablicy;
-    GtkWidget *tablica_barier[81];
+    GtkWidget *tablica_barier[72];
     GtkWidget *tablica_barier_martwych[64];
     PipesPtr potoki;
 };
 
 
-
-//struct bomba wybuch[72];
-//void podlacz_bariere(GtkWidget *bariera, unsigned int x, unsigned int y, PipesPtr potoki);
-//void podlacz_bariere(GtkWidget *bariera, unsigned int x, unsigned int y, PipesPtr potoki, struct dane_bariery *bariera_i_jej_przyjaciele);
-
 void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], struct pozycja_do_ruchu pozycje_guzikow[][9], PipesPtr potoki);
 
-//void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[], GtkWidget *bariery_martwe[], PipesPtr potoki);
 void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[],  GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[],  PipesPtr potoki);
+
 bool czy_bariera_pionowa(int numer);
 bool czy_bariera_pozioma(int numer);
 bool czy_bariera_martwa(int numer);
 
-
-//void stawianie_bariery_poziomej(GtkWidget *widget, struct dane_bariery *dane_smieszne);
-//void stawianie_bariery_poziomej(GtkWidget *widget, struct bomba *dane_smieszne);
-//void stawianie_bariery_pionowej(GtkWidget *widget, struct bomba *dane_smieszne);
-
-//void podlaczanie_barier(GtkWidget *wszyskie_bariery[], PipesPtr potoki);
 
 #endif /* interfejs_przygotowanie_h */

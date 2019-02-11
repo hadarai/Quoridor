@@ -140,6 +140,26 @@ bool czy_mogę_postawic_bariere_pionowo(int numer_bariery_pionowej)
 
     return czy_ok;
 }
+
+void miedzy_kim_jestes_pion(int numer_bariery)
+{
+    int kolumna = numer_bariery%8;
+    int rzad = numer_bariery/8;
+    
+    int pole1 = kolumna + (rzad * 9);
+    int pole2 = kolumna + 1 + (rzad * 9);
+    
+    printf("Jestem pionowo miedzy %d, a %d.\n", pole1, pole2);
+}
+void miedzy_kim_jestes_poziom(int numer_bariery)
+{
+    int kolumna = numer_bariery % 9;
+    int wiersz = numer_bariery / 9;
+    
+    int pole1 = kolumna + (9 * wiersz);
+    int pole2 = kolumna + (9 * (wiersz + 1));
+    printf("Jestem poziomo miedzy %d, a %d.\n", pole1, pole2);
+}
 bool DFS()
 {
     extern struct pozycja pozycja_gracza;
