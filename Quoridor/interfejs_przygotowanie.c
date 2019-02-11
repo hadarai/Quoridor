@@ -129,7 +129,6 @@ void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe
 //        printf("%d", dane_barier_poziomych[i].numer_w_tablicy);
         
         g_signal_connect(G_OBJECT(bariery_poziome[i]), "button_press_event", G_CALLBACK(stawianie_bariery_poziomej), (gpointer)&dane_barier_poziomych[i]);
-        
     }
     
     //pionowe

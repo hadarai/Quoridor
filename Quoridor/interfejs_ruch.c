@@ -35,10 +35,12 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     {
 
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
-        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
-//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
+//        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        //sprawdzenie zwyciestwa
+        if(pozycja_gracza.y <= 0) zwyciestwo();
         moj_ruch = false;
         wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
@@ -46,10 +48,12 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     if (czy_to_bedzie_w_lewo(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
-        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
-//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
+//        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        //sprawdzenie zwyciestwa
+        if(pozycja_gracza.y <= 0) zwyciestwo();
         moj_ruch = false;
         wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
@@ -57,10 +61,12 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     if (czy_to_bedzie_w_gore(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
-        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
-//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
+//        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        //sprawdzenie zwyciestwa
+        if(pozycja_gracza.y <= 0) zwyciestwo();
         moj_ruch = false;
         wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
@@ -68,10 +74,12 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     if (czy_to_bedzie_w_dol(pozycja->x, pozycja->y, pozycja_gracza.x, pozycja_gracza.y, pozycja_przeciwnika.x, pozycja_przeciwnika.y)) //1
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
-        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
-//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
+//        gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
+        if(pozycja_gracza.y <= 0) zwyciestwo();
+        //sprawdzenie zwyciestwa
         moj_ruch = false;
         wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
@@ -130,27 +138,11 @@ bool czy_to_bedzie_w_dol(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja
     return false;
 }
 
-void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
-{
-    char etykieta_przeciwnika[10] = "P";
-    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_przeciwnika);
-}
-
-void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
-{
-    GtkWidget *image;
-//    GtkWidget *guzik_gracza = wszystkie_guziki[x][y];
-    image = gtk_image_new_from_file ("pionek_gracza.png");
-//    gtk_container_add (GTK_CONTAINER (event_box), image);
-    gtk_button_set_image (GTK_BUTTON(wszystkie_guziki[x][y]),image);
-//    char etykieta_gracza[10] = "G";
-}
-
 void ruch_przeciwnika(int x, int y)
 {
     extern GtkWidget *guziki[9][9];
     extern struct pozycja pozycja_przeciwnika;
-    char etykieta_przeciwnika[10] = "P";
+    //    char etykieta_przeciwnika[10] = "P";
     char etykieta_pusta[10] = "";
     
     gtk_button_set_label(GTK_BUTTON(guziki[pozycja_przeciwnika.x][pozycja_przeciwnika.y]), etykieta_pusta);
@@ -158,5 +150,30 @@ void ruch_przeciwnika(int x, int y)
     pozycja_przeciwnika.x = x;
     pozycja_przeciwnika.y = y;
     
-    gtk_button_set_label(GTK_BUTTON(guziki[x][y]), etykieta_przeciwnika);
+    
+    wyswietl_przeciwnika(guziki, x, y);
+    //    gtk_button_set_label(GTK_BUTTON(guziki[x][y]), etykieta_przeciwnika);
+}
+
+void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
+{
+//    char etykieta_przeciwnika[10] = "P";
+//    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_przeciwnika);
+    GtkWidget *grafika;
+    //    GtkWidget *guzik_gracza = wszystkie_guziki[x][y];
+    grafika = gtk_image_new_from_file ("pionek_przeciwnika.png");
+    //    gtk_container_add (GTK_CONTAINER (event_box), image);
+    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), NULL);
+    gtk_button_set_image (GTK_BUTTON(wszystkie_guziki[x][y]),grafika);
+}
+
+void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
+{
+    GtkWidget *grafika;
+//    GtkWidget *guzik_gracza = wszystkie_guziki[x][y];
+    grafika = gtk_image_new_from_file ("pionek_gracza.png");
+//    gtk_container_add (GTK_CONTAINER (event_box), image);
+    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), NULL);
+    gtk_button_set_image (GTK_BUTTON(wszystkie_guziki[x][y]),grafika);
+//    char etykieta_gracza[10] = "G";
 }

@@ -15,17 +15,7 @@
 #include "fifo.h"
 #include "komunikacja.h"
 
-//struct dane_bariery
-//{
-//    int numer_w_tablicy;
-//    GtkWidget *tablica_barier[81];
-//    GtkWidget *tablica_barier_martwych[64];
-//    PipesPtr potoki;
-//};
-
 extern bool moj_ruch;
-
-
 
 void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *dane_tej_bariery);
 void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *dane_tej_bariery);

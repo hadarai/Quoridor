@@ -15,6 +15,7 @@
 #include "mechanika_grafu.h"
 #include "interfejs_bariery.h"
 #include <stdbool.h>
+#include "koniec.h"
 //#include "main.h"
 
 struct pozycja

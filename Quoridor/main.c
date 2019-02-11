@@ -20,7 +20,6 @@
 #include "interfejs_przygotowanie.h"
 #include "interfejs_ruch.h"
 #include "interfejs_bariery.h"
-//#include "main.h"
 
 #define MAKS_DL_TEKSTU 100
 
