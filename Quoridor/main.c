@@ -27,8 +27,9 @@
 static GtkWidget *okno_gry;
 PipesPtr potoki;
 static char *moj_id, *twoj_id;
-char wiadomosc[6];
+char wiadomosc[10];
 
+unsigned int ilosc_barier = 10;
 //static void przekaz_tekst(GtkWidget *widget, GtkWidget *text);
 //static gboolean pobierz_tekst(gpointer data);
 
@@ -102,8 +103,10 @@ int main(int argc, char *argv[])
 
     rysowanie_interfejsu(guziki, bariery_pionowe, bariery_poziome, bariery_martwe, siatka_okna, potoki);
 
-    podlaczanie_guzikow(guziki, pozycje_guzikow, potoki);
+    podlaczanie_guzikow(guziki, potoki);
     podlaczanie_barier(bariery_poziome, bariery_pionowe, bariery_martwe, dane_barier_poziomych, dane_barier_pionowych, potoki);
+    
+//    ustaw_grafike_bariery_martwej(bariery_martwe[23]);
 
     wyswietl_przeciwnika(guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
     wyswietl_gracza(guziki, pozycja_gracza.x, pozycja_gracza.y);
@@ -111,10 +114,12 @@ int main(int argc, char *argv[])
     //    g_timeout_add(100,pobierz_tekst,NULL);
 
     g_timeout_add(100, odczytaj_wiadmosc, potoki);
-    GtkWidget *grafika_bariery;
-    grafika_bariery = gtk_image_new_from_file ("bariera.png");
-    gtk_container_add (GTK_CONTAINER (bariery_poziome[2]), grafika_bariery);
-
+    
+//    GtkWidget *grafika_bariery;
+//    grafika_bariery = gtk_image_new_from_file ("bariera_pozioma.png");
+//    gtk_container_add (GTK_CONTAINER (bariery_poziome[2]), grafika_bariery);
+    
+    
     gtk_widget_show_all(okno_gry);
     gtk_main();
     return 0;

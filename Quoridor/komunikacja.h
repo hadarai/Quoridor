@@ -14,9 +14,12 @@
 #include "gtk/gtk.h"
 #include "fifo.h"
 #include "interfejs_ruch.h"
+#include "interfejs_bariery.h"
 
 
 void wyslij_ruch(int x_gracza, int y_gracza, PipesPtr potoki);
+void wyslij_bariere(int numer_bariery, int czy_pion, PipesPtr potoki);
+
 gboolean odczytaj_wiadmosc(gpointer data);
 
 void stalo_sie(void);

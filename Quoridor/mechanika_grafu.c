@@ -53,12 +53,14 @@ bool czy_moge_przejsc_na_grafie(int x_gracza, int y_gracza, int x_dokad, int y_d
     int numer_pola_gracza = ((y_gracza * 9) + x_gracza);
     int numer_pola_dokad = ((y_dokad * 9) + x_dokad);
     
-//    printf("%d %d", numer_pola_gracza, numer_pola_dokad );
-    if(graf_polaczen_pol[numer_pola_gracza][numer_pola_dokad])
-    {
-        return true;
-    }
-    return false;
+    printf("Sprawdzam przejscie miedzy: %d %d\n", numer_pola_gracza, numer_pola_dokad );
+//    if(graf_polaczen_pol[numer_pola_gracza][numer_pola_dokad])
+//    {
+//        return true;
+//    }
+//    return false;
+    
+    return graf_polaczen_pol[numer_pola_gracza][numer_pola_dokad];
 }
 
 void przerwij_polaczenie_pionowe(int numer_bariery_pionowej)
@@ -71,8 +73,10 @@ void przerwij_polaczenie_pionowe(int numer_bariery_pionowej)
     int pole1 = kolumna + (rzad * 9);
     int pole2 = kolumna + 1 + (rzad * 9);
     
+    printf("Przerywam: %d i %d\n", pole1, pole2);
+    
     graf_polaczen_pol[pole1][pole2] = false;
-    graf_polaczen_pol[pole1][pole2] = false;
+    graf_polaczen_pol[pole2][pole1] = false;
 }
 
 void przerwij_polaczenie_poziome(int numer_bariery_poziomej)
@@ -84,8 +88,10 @@ void przerwij_polaczenie_poziome(int numer_bariery_poziomej)
     int pole1 = kolumna + (9 * wiersz);
     int pole2 = kolumna + (9 * (wiersz + 1));
     
+    printf("Przerywam: %d i %d\n", pole1, pole2);
+    
     graf_polaczen_pol[pole1][pole2] = false;
-    graf_polaczen_pol[pole1][pole2] = false;
+    graf_polaczen_pol[pole2][pole1] = false;
 }
 
 void przywroc_polaczenie_pionowe(int numer_bariery_pionowej)
@@ -99,7 +105,7 @@ void przywroc_polaczenie_pionowe(int numer_bariery_pionowej)
     int pole2 = kolumna + 1 + (rzad * 9);
     
     graf_polaczen_pol[pole1][pole2] = true;
-    graf_polaczen_pol[pole1][pole2] = true;
+    graf_polaczen_pol[pole2][pole1] = true;
 }
 
 void przywroc_polaczenie_poziome(int numer_bariery_poziomej)
@@ -112,10 +118,10 @@ void przywroc_polaczenie_poziome(int numer_bariery_poziomej)
     int pole2 = kolumna + (9 * (wiersz + 1));
     
     graf_polaczen_pol[pole1][pole2] = true;
-    graf_polaczen_pol[pole1][pole2] = true;
+    graf_polaczen_pol[pole2][pole1] = true;
 }
 
-bool czy_mogę_postawic_bariere_poziomo(int numer_bariery_poziomej)
+bool czy_moge_postawic_bariere_poziomo(int numer_bariery_poziomej)
 {
     przerwij_polaczenie_poziome(numer_bariery_poziomej);
     przerwij_polaczenie_poziome(numer_bariery_poziomej + 1);
@@ -128,7 +134,7 @@ bool czy_mogę_postawic_bariere_poziomo(int numer_bariery_poziomej)
     return czy_ok;
 }
 
-bool czy_mogę_postawic_bariere_pionowo(int numer_bariery_pionowej)
+bool czy_moge_postawic_bariere_pionowo(int numer_bariery_pionowej)
 {
     przerwij_polaczenie_pionowe(numer_bariery_pionowej);
     przerwij_polaczenie_pionowe(numer_bariery_pionowej + 8);

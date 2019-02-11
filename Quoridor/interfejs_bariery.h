@@ -13,6 +13,7 @@
 #include "gtk/gtk.h"
 #include "interfejs_przygotowanie.h"
 #include "fifo.h"
+#include "komunikacja.h"
 
 //struct dane_bariery
 //{
@@ -24,14 +25,15 @@
 
 extern bool moj_ruch;
 
-//bool czy_bariera_juz_tu_stoi_pion[72];
-//bool czy_bariera_juz_tu_stoi_poziom[72];
 
-void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *super_dane);
-void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *super_dane);
 
-void bariera_pozioma_przedstaw(GtkWidget *widget);
-void bariera_pionowa_przedstaw(GtkWidget *widget);
-void bariera_martwa_przedstaw(GtkWidget *widget);
+void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *dane_tej_bariery);
+void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct dane_bariery *dane_tej_bariery);
+
+void ustaw_grafike_bariery_poziomej(GtkWidget *bariera);
+void ustaw_grafike_bariery_pionowej(GtkWidget *bariera);
+void ustaw_grafike_bariery_martwej(GtkWidget *bariera);
+
+void przeciwnik_polozyl_bariere(int numer_bariery, int czy_pionowa);
 
 #endif /* interfejs_bariery_h */

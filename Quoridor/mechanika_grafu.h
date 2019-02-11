@@ -26,8 +26,8 @@ void przerwij_polaczenie_poziome(int numer_bariery_poziomej);
 void przywroc_polaczenie_pionowe(int numer_bariery_pionowej);
 void przywroc_polaczenie_poziome(int numer_bariery_poziomej);
 
-bool czy_mogę_postawic_bariere_poziomo(int numer_bariery_poziomej);
-bool czy_mogę_postawic_bariere_pionowo(int numer_bariery_pionowej);
+bool czy_moge_postawic_bariere_poziomo(int numer_bariery_poziomej);
+bool czy_moge_postawic_bariere_pionowo(int numer_bariery_pionowej);
 
 bool DFS(void);
 

@@ -8,11 +8,6 @@
 
 #include "interfejs_ruch.h"
 
-//struct dane_o_ruchu_w_prawo dane_ruchu_prawo;
-//struct dane_o_ruchu_w_lewo dane_ruchu_lewo;
-//struct dane_o_ruchu_w_dol dane_ruchu_dol;
-//struct dane_o_ruchu_w_gore dane_ruchu_gora;
-
 extern bool moj_ruch;
 extern struct pozycja pozycja_gracza;
 extern struct pozycja pozycja_przeciwnika;
@@ -41,6 +36,7 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
 
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
         moj_ruch = false;
@@ -51,6 +47,7 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
         moj_ruch = false;
@@ -61,6 +58,7 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
         moj_ruch = false;
@@ -71,12 +69,13 @@ void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja)
     {
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja_gracza.x][pozycja_gracza.y]), etykieta_pusta);
         gtk_button_set_label(GTK_BUTTON(pozycja->tablica[pozycja->x][pozycja->y]), etykieta_gracza);
+//        wyswietl_gracza(pozycja->tablica, pozycja->x, pozycja->y);
         pozycja_gracza.x = pozycja->x;
         pozycja_gracza.y = pozycja->y;
         moj_ruch = false;
         wyslij_ruch(pozycja_gracza.x, pozycja_gracza.y, pozycja->potoki);
     }
-
+//    moj_ruch = true;
     return;
 }
 
@@ -145,7 +144,6 @@ void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned 
 //    gtk_container_add (GTK_CONTAINER (event_box), image);
     gtk_button_set_image (GTK_BUTTON(wszystkie_guziki[x][y]),image);
 //    char etykieta_gracza[10] = "G";
-    
 }
 
 void ruch_przeciwnika(int x, int y)

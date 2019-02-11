@@ -13,6 +13,7 @@
 #include <gtk/gtk.h>
 #include "komunikacja.h"
 #include "mechanika_grafu.h"
+#include "interfejs_bariery.h"
 #include <stdbool.h>
 //#include "main.h"
 
