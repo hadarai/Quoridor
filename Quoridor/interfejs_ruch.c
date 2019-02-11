@@ -139,8 +139,13 @@ void wyswietl_przeciwnika(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsi
 
 void wyswietl_gracza(GtkWidget *wszystkie_guziki[][9], unsigned int x, unsigned int y)
 {
-    char etykieta_gracza[10] = "G";
-    gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x][y]), etykieta_gracza);
+    GtkWidget *image;
+//    GtkWidget *guzik_gracza = wszystkie_guziki[x][y];
+    image = gtk_image_new_from_file ("pionek_gracza.png");
+//    gtk_container_add (GTK_CONTAINER (event_box), image);
+    gtk_button_set_image (GTK_BUTTON(wszystkie_guziki[x][y]),image);
+//    char etykieta_gracza[10] = "G";
+    
 }
 
 void ruch_przeciwnika(int x, int y)

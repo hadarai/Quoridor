@@ -19,7 +19,6 @@ void uzupelnij_graf(bool graf[][81])
             {
                 graf[i][j] = 1;
             }
-            
         }
     }
     
@@ -62,6 +61,91 @@ bool czy_moge_przejsc_na_grafie(int x_gracza, int y_gracza, int x_dokad, int y_d
     return false;
 }
 
+void przerwij_polaczenie_pionowe(int numer_bariery_pionowej)
+{
+    extern bool graf_polaczen_pol[81][81];
+    
+    int kolumna = numer_bariery_pionowej%8;
+    int rzad = numer_bariery_pionowej/8;
+    
+    int pole1 = kolumna + (rzad * 9);
+    int pole2 = kolumna + 1 + (rzad * 9);
+    
+    graf_polaczen_pol[pole1][pole2] = false;
+    graf_polaczen_pol[pole1][pole2] = false;
+}
+
+void przerwij_polaczenie_poziome(int numer_bariery_poziomej)
+{
+    extern bool graf_polaczen_pol[81][81];
+    int kolumna = numer_bariery_poziomej % 9;
+    int wiersz = numer_bariery_poziomej / 9;
+    
+    int pole1 = kolumna + (9 * wiersz);
+    int pole2 = kolumna + (9 * (wiersz + 1));
+    
+    graf_polaczen_pol[pole1][pole2] = false;
+    graf_polaczen_pol[pole1][pole2] = false;
+}
+
+void przywroc_polaczenie_pionowe(int numer_bariery_pionowej)
+{
+    extern bool graf_polaczen_pol[81][81];
+    
+    int kolumna = numer_bariery_pionowej%8;
+    int rzad = numer_bariery_pionowej/8;
+    
+    int pole1 = kolumna + (rzad * 9);
+    int pole2 = kolumna + 1 + (rzad * 9);
+    
+    graf_polaczen_pol[pole1][pole2] = true;
+    graf_polaczen_pol[pole1][pole2] = true;
+}
+
+void przywroc_polaczenie_poziome(int numer_bariery_poziomej)
+{
+    extern bool graf_polaczen_pol[81][81];
+    int kolumna = numer_bariery_poziomej % 9;
+    int wiersz = numer_bariery_poziomej / 9;
+    
+    int pole1 = kolumna + (9 * wiersz);
+    int pole2 = kolumna + (9 * (wiersz + 1));
+    
+    graf_polaczen_pol[pole1][pole2] = true;
+    graf_polaczen_pol[pole1][pole2] = true;
+}
+
+bool czy_mogę_postawic_bariere_poziomo(int numer_bariery_poziomej)
+{
+    przerwij_polaczenie_poziome(numer_bariery_poziomej);
+    przerwij_polaczenie_poziome(numer_bariery_poziomej + 1);
+    
+    bool czy_ok = DFS();
+    
+    przywroc_polaczenie_poziome(numer_bariery_poziomej);
+    przywroc_polaczenie_poziome(numer_bariery_poziomej + 1);
+    
+    return czy_ok;
+}
+
+bool czy_mogę_postawic_bariere_pionowo(int numer_bariery_pionowej)
+{
+    przerwij_polaczenie_pionowe(numer_bariery_pionowej);
+    przerwij_polaczenie_pionowe(numer_bariery_pionowej + 8);
+    
+    bool czy_ok = DFS();
+    
+    przywroc_polaczenie_pionowe(numer_bariery_pionowej);
+    przywroc_polaczenie_pionowe(numer_bariery_pionowej + 8);
+
+    return czy_ok;
+}
+bool DFS()
+{
+    extern struct pozycja pozycja_gracza;
+    
+    return true;
+}
 void wypisz_graf(bool graf[][81])
 {
     

@@ -14,19 +14,25 @@
 #include "interfejs_przygotowanie.h"
 #include "fifo.h"
 
-struct dane_bariery
+struct bomba
 {
-    unsigned int x;
-    unsigned int y;
-    GtkWidget *tablica_barier[81];
-    PipesPtr potoki;
+    int liczba;
 };
 
-//void uaktywnij_bariery(GtkWidget *bariery[], const unsigned short int ilosc);
-//void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
-void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
+//struct dane_bariery
+//{
+//    int numer_w_tablicy;
+//    GtkWidget *tablica_barier[81];
+//    GtkWidget *tablica_barier_martwych[64];
+//    PipesPtr potoki;
+//};
 
-void bariera_pozioma(GtkWidget *widget);
+//void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
+//void stawianie_bariery(GtkWidget *widget, struct dane_bariery *bariera);
+
+void stawianie_bariery_poziomej(GtkWidget *widget, struct bomba *dane_smieszne);
+void stawianie_bariery_pionowej(GtkWidget *widget, struct bomba *dane_smieszne);
+
 void bariera_pionowa(GtkWidget *widget);
 void bariera_martwa(GtkWidget *widget);
 #endif /* interfejs_bariery_h */

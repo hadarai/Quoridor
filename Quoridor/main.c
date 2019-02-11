@@ -44,15 +44,22 @@ struct pozycja pozycja_przeciwnika;
 bool graf_polaczen_pol[81][81];
 
 GtkWidget *guziki[9][9]; //[x][y]
+
 GtkWidget *bariery_pionowe[ilosc_barier_pionowych];
 GtkWidget *bariery_poziome[ilosc_barier_poziomych];
 GtkWidget *bariery_martwe[ilosc_barier_martwych];
 
 struct pozycja_do_ruchu pozycje_guzikow[9][9];
+struct dane_bariery dane_barier_poziomych[72];
+struct dane_bariery dane_barier_pionowych[72];
+//struct dane_bariery super_dane;
+
+struct bomba wybuch[72];
 
 
 int main(int argc, char *argv[])
 {
+    
     if ((potoki = initPipes(argc, argv)) == NULL)
         return 1;
     if (argc == 2 && strcmp(argv[1], "A") == 0)
@@ -93,31 +100,19 @@ int main(int argc, char *argv[])
     pozycja_przeciwnika.x = 4;
     pozycja_przeciwnika.y = 0;
 
-    //    sendStringToPipe(potoki, "raz");
 
-    //    rysowanie_interfejsu(guziki, , siatka_okna, potoki);
     rysowanie_interfejsu(guziki, bariery_pionowe, bariery_poziome, bariery_martwe, siatka_okna, potoki);
 
     podlaczanie_guzikow(guziki, pozycje_guzikow, potoki);
-//    podlaczanie_barier(bariery_poziome, bariery_pionowe, potoki);
+    podlaczanie_barier(bariery_poziome, bariery_pionowe, bariery_martwe, dane_barier_poziomych, dane_barier_pionowych, potoki);
 
     wyswietl_przeciwnika(guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
     wyswietl_gracza(guziki, pozycja_gracza.x, pozycja_gracza.y);
 
     //    g_timeout_add(100,pobierz_tekst,NULL);
 
-    //    if (moj_ruch)
-    //    {
-    //        wyswietl_pola_dostepne_do_ruchu(wszystkie_guziki, wszystkie_bariery, siatka_okna, pozycja_gracza.x, pozycja_gracza.y);
-    //        //moj_ruch = false;
-    //    }
-
     g_timeout_add(100, odczytaj_wiadmosc, potoki);
 
-    //    char wiad[15];
-    //    sprintf(wiad, "literki a");
-
-    //    printf("%s", "literki a");
 
     gtk_widget_show_all(okno_gry);
     gtk_main();
@@ -129,7 +124,7 @@ int main(int argc, char *argv[])
 //    gchar wejscie[MAKS_DL_TEKSTU + 5];
 //
 //    sendStringToPipe(potoki, gtk_entry_get_text(GTK_ENTRY(text)));
-//    //    sendStringToPipe(potoki, <#const char *data#>)21`120\]
+//    //    sendStringToPipe(potoki, )21`120\]
 //
 //    strcpy(wejscie, moj_id);
 //    strcpy(wejscie + strlen(wejscie), gtk_entry_get_text(GTK_ENTRY(text)));
