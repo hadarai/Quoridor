@@ -11,12 +11,12 @@
 
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include <stdbool.h>
+
 #include "komunikacja.h"
 #include "mechanika_grafu.h"
 #include "interfejs_bariery.h"
-#include <stdbool.h>
 #include "koniec.h"
-//#include "main.h"
 
 struct pozycja
 {
@@ -32,7 +32,6 @@ struct pozycja_do_ruchu
     PipesPtr potoki;
 };
 
-//void ruch(GtkWidget *widget, struct pozycja *pozycja);
 void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja);
 
 bool czy_to_bedzie_w_prawo(int pozycja_guzika_x, int pozycja_guzika_y, int pozycja_gracza_x, int pozycja_gracza_y, int pozycja_przeciwnika_x, int pozycja_przeciwnika_y);

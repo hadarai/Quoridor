@@ -24,7 +24,6 @@ void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct 
     
     if(czy_bariera_juz_tu_stoi_poziom[numer] || czy_bariera_juz_tu_stoi_poziom[numer+1] || czy_bariera_juz_tu_stoi_martwe[numer - (numer/9)])
     {
-        printf("nie mozna, bo bool");
         return;
     }
     
@@ -45,6 +44,7 @@ void stawianie_bariery_poziomej(GtkWidget *widget, GdkEvent *pomocniczy, struct 
     moj_ruch = false;
     wyslij_bariere(numer, 0, dane_tej_bariery->potoki);
     ilosc_barier--;
+//    wypisz_graf();
     return;
 }
 
@@ -60,9 +60,11 @@ void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct 
     
     if(czy_bariera_juz_tu_stoi_pion[numer] || czy_bariera_juz_tu_stoi_pion[numer+8] || czy_bariera_juz_tu_stoi_martwe[numer])
     {
-        printf("nie mozna, bo bool");
+//        printf("nie mozna, bo bool");
         return;
     }
+    
+    if(!czy_moge_postawic_bariere_poziomo(numer)) return;
     
     //zmiana grafik
     ustaw_grafike_bariery_pionowej(dane_tej_bariery->tablica_barier[numer]);
@@ -79,13 +81,14 @@ void stawianie_bariery_pionowej(GtkWidget *widget, GdkEvent *pomocniczy, struct 
     moj_ruch = false;
     wyslij_bariere(numer, 1, dane_tej_bariery->potoki);
     ilosc_barier--;
+//    wypisz_graf();
     return;
 }
 
 void ustaw_grafike_bariery_poziomej(GtkWidget *bariera)
 {
     GtkWidget *grafika;
-    grafika = gtk_image_new_from_file ("bariera_pozioma.png");
+    grafika = gtk_image_new_from_file ("grafika/bariera_pozioma.png");
     gtk_container_add (GTK_CONTAINER(bariera),grafika);
     gtk_widget_show(grafika);
 
@@ -94,7 +97,7 @@ void ustaw_grafike_bariery_poziomej(GtkWidget *bariera)
 void ustaw_grafike_bariery_pionowej(GtkWidget *bariera)
 {
     GtkWidget *grafika;
-    grafika = gtk_image_new_from_file ("bariera_pionowa.png");
+    grafika = gtk_image_new_from_file ("grafika/bariera_pionowa.png");
     gtk_container_add (GTK_CONTAINER(bariera),grafika);
     gtk_widget_show(grafika);
 }
@@ -102,7 +105,7 @@ void ustaw_grafike_bariery_pionowej(GtkWidget *bariera)
 void ustaw_grafike_bariery_martwej(GtkWidget *bariera)
 {
     GtkWidget *grafika;
-    grafika = gtk_image_new_from_file ("bariera_martwa.png");
+    grafika = gtk_image_new_from_file ("grafika/bariera_martwa.png");
     gtk_container_add (GTK_CONTAINER(bariera),grafika);
     gtk_widget_show(grafika);
 }

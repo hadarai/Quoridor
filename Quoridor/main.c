@@ -21,18 +21,18 @@
 #include "interfejs_ruch.h"
 #include "interfejs_bariery.h"
 
+#include "koniec.h"
+
 #define MAKS_DL_TEKSTU 100
 
-static GtkWidget *okno_gry;
+GtkWidget *okno_gry;
 PipesPtr potoki;
 static char *moj_id, *twoj_id;
 char wiadomosc[10];
-
+bool przegralem = false;
 unsigned int ilosc_barier = 10;
-//static void przekaz_tekst(GtkWidget *widget, GtkWidget *text);
-//static gboolean pobierz_tekst(gpointer data);
 
-static void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
+void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
 
 const unsigned short int ilosc_barier_pionowych = 72;
 const unsigned short int ilosc_barier_poziomych = 72;
@@ -52,7 +52,6 @@ GtkWidget *bariery_martwe[ilosc_barier_martwych];
 struct pozycja_do_ruchu pozycje_guzikow[9][9];
 struct dane_bariery dane_barier_poziomych[72];
 struct dane_bariery dane_barier_pionowych[72];
-//struct dane_bariery super_dane;
 
 
 
@@ -78,11 +77,14 @@ int main(int argc, char *argv[])
 
     gchar naglowek[31];
     if (moj_id[0] == 'A')
+    {
         sprintf(naglowek, "Gracz Pierwszy");
+    }
     else
+    {
         sprintf(naglowek, "Gracz Drugi");
-    uzupelnij_graf(graf_polaczen_pol);
-    //    wypisz_graf(graf_polaczen_pol);
+    }
+    
     okno_gry = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(okno_gry), naglowek);
     g_signal_connect(G_OBJECT(okno_gry), "destroy", G_CALLBACK(zakoncz_dzialanie), NULL);
@@ -98,61 +100,25 @@ int main(int argc, char *argv[])
     pozycja_gracza.y = 8;
     pozycja_przeciwnika.x = 4;
     pozycja_przeciwnika.y = 0;
-
+    
+    uzupelnij_graf(graf_polaczen_pol);
 
     rysowanie_interfejsu(guziki, bariery_pionowe, bariery_poziome, bariery_martwe, siatka_okna, potoki);
 
     podlaczanie_guzikow(guziki, potoki);
     podlaczanie_barier(bariery_poziome, bariery_pionowe, bariery_martwe, dane_barier_poziomych, dane_barier_pionowych, potoki);
     
-//    ustaw_grafike_bariery_martwej(bariery_martwe[23]);
-
     wyswietl_przeciwnika(guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
     wyswietl_gracza(guziki, pozycja_gracza.x, pozycja_gracza.y);
 
-    //    g_timeout_add(100,pobierz_tekst,NULL);
-
     g_timeout_add(100, odczytaj_wiadmosc, potoki);
-    
-//    GtkWidget *grafika_bariery;
-//    grafika_bariery = gtk_image_new_from_file ("bariera_pozioma.png");
-//    gtk_container_add (GTK_CONTAINER (bariery_poziome[2]), grafika_bariery);
-    
     
     gtk_widget_show_all(okno_gry);
     gtk_main();
     return 0;
 }
 
-//static void przekaz_tekst(GtkWidget *widget, GtkWidget *text)
-//{
-//    gchar wejscie[MAKS_DL_TEKSTU + 5];
-//
-//    sendStringToPipe(potoki, gtk_entry_get_text(GTK_ENTRY(text)));
-//    //    sendStringToPipe(potoki, )21`120\]
-//
-//    strcpy(wejscie, moj_id);
-//    strcpy(wejscie + strlen(wejscie), gtk_entry_get_text(GTK_ENTRY(text)));
-//    strcat(wejscie, "\n");
-//
-//    gtk_text_buffer_insert_at_cursor(GTK_TEXT_BUFFER(bufor), wejscie, -1);
-//    gtk_entry_set_text(GTK_ENTRY(text), "");
-//}
-
-//static gboolean pobierz_tekst(gpointer data)
-//{
-//    gchar wejscie[MAKS_DL_TEKSTU + 5];
-//
-//    strcpy(wejscie, twoj_id);
-//    if (getStringFromPipe(potoki, wejscie + strlen(wejscie), MAKS_DL_TEKSTU))
-//    {
-//        strcat(wejscie, "\n");
-//        gtk_text_buffer_insert_at_cursor(GTK_TEXT_BUFFER(bufor), wejscie, -1);
-//    }
-//    return TRUE;
-//}
-
-static void zakoncz_dzialanie(GtkWidget *widget, gpointer data)
+void zakoncz_dzialanie(GtkWidget *widget, gpointer data)
 {
     closePipes(potoki);
     gtk_main_quit();

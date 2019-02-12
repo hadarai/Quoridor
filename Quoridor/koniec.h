@@ -15,4 +15,5 @@
 void zwyciestwo(void);
 void przegrana(void);
 
+extern void zakoncz_dzialanie(GtkWidget *widget, gpointer data);
 #endif /* koniec_h */

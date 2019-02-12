@@ -19,9 +19,6 @@
 #include "fifo.h"
 
 
-bool czy_niepuste_pole(unsigned int i_wiersz, unsigned int j_kolumna);
-bool czy_klasc_guzik(unsigned int i_wiersz, unsigned int j_kolumna);
-
 struct dane_bariery
 {
     int numer_w_tablicy;
@@ -29,6 +26,10 @@ struct dane_bariery
     GtkWidget *tablica_barier_martwych[64];
     PipesPtr potoki;
 };
+
+
+bool czy_niepuste_pole(unsigned int i_wiersz, unsigned int j_kolumna);
+bool czy_klasc_guzik(unsigned int i_wiersz, unsigned int j_kolumna);
 
 void rysowanie_interfejsu(
                           GtkWidget *wszystkie_guziki[][9],
@@ -38,14 +39,18 @@ void rysowanie_interfejsu(
                           GtkWidget *siatka_okna,
                           PipesPtr potoki);
 
-void podlaczanie_guzikow(
-                         GtkWidget *wszystkie_guziki[][9],
-                         //struct pozycja_do_ruchu pozycje_guzikow[9][9],
-                         PipesPtr potoki);
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], PipesPtr potoki);
 
-void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[],  GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[],  PipesPtr potoki);
+void podlaczanie_barier(
+                        GtkWidget *bariery_poziome[],
+                        GtkWidget *bariery_pionowe[],
+                        GtkWidget *bariery_martwe[],
+                        struct dane_bariery dane_barier_poziomych[],
+                        struct dane_bariery dane_barier_pionowych[],
+                        PipesPtr potoki);
 
 bool czy_bariera_pionowa(int numer);
 bool czy_bariera_pozioma(int numer);
 bool czy_bariera_martwa(int numer);
+
 #endif /* interfejs_przygotowanie_h */

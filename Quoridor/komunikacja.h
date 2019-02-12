@@ -24,8 +24,4 @@ void wyslij_zwyciestwo(void);
 
 gboolean odczytaj_wiadmosc(gpointer data);
 
-void stalo_sie(void);
-void stalo_sie_bariera(void);
-void pole_do_ruchu(void);
-//void ruch(struct dane_o_ruchu dane);
 #endif /* komunikacja_h */

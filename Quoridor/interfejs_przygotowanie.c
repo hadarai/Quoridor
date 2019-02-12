@@ -12,7 +12,6 @@ extern struct dane_bariery dane_barier_poziomych[];
 void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_pionowe[], GtkWidget *bariery_poziome[], GtkWidget *bariery_martwe[], GtkWidget *siatka_okna, PipesPtr potoki)
 {
     unsigned int numer_bariery = 0;
-//    char numerek_na_guziku[10] = "";
     unsigned int licznik_pionowych_barier = 0, licznik_poziomych_barier = 0, licznik_martwych_barier = 0;
 
     for (int i_wiersz_y = 0; i_wiersz_y < 17; i_wiersz_y++)
@@ -27,9 +26,6 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_p
                 
                 gtk_grid_attach(GTK_GRID(siatka_okna), wszystkie_guziki[x_guzika][y_guzika], j_kolumna_x, i_wiersz_y, 1, 1);
                 
-//                sprintf(numerek_na_guziku, "%d", y_guzika*9 + x_guzika);
-//                gtk_button_set_label(GTK_BUTTON(wszystkie_guziki[x_guzika][y_guzika]),numerek_na_guziku);
-                
             }
             else
             {
@@ -38,27 +34,22 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_p
                     //bariera pionowa
                     bariery_pionowe[licznik_pionowych_barier] = gtk_event_box_new();
                     gtk_grid_attach(GTK_GRID(siatka_okna), bariery_pionowe[licznik_pionowych_barier], j_kolumna_x, i_wiersz_y, 1, 1);
-//                    g_signal_connect(G_OBJECT(bariery_pionowe[licznik_pionowych_barier]), "button_press_event", G_CALLBACK(bariera_pionowa_przedstaw), NULL);
                     licznik_pionowych_barier++;
                 }
 
                 if (czy_bariera_pozioma(numer_bariery))
                 {
-//                    printf("%d", licznik_poziomych_barier);
                     //bariera pozioma
                     bariery_poziome[licznik_poziomych_barier] = gtk_event_box_new();
                     gtk_grid_attach(GTK_GRID(siatka_okna), bariery_poziome[licznik_poziomych_barier], j_kolumna_x, i_wiersz_y, 1, 1);
-//                    g_signal_connect(G_OBJECT(bariery_poziome[licznik_poziomych_barier]), "button_press_event", G_CALLBACK(bariera_pozioma_przedstaw), NULL);
                     licznik_poziomych_barier++;
                 }
 
                 if (czy_bariera_martwa(numer_bariery))
                 {
                     //bariera martwa
-//                    printf("%d ", licznik_martwych_barier);
                     bariery_martwe[licznik_martwych_barier] = gtk_event_box_new();
                     gtk_grid_attach(GTK_GRID(siatka_okna), bariery_martwe[licznik_martwych_barier], j_kolumna_x, i_wiersz_y, 1, 1);
-//                    g_signal_connect(G_OBJECT(bariery_martwe[licznik_martwych_barier]), "button_press_event", G_CALLBACK(bariera_martwa_przedstaw), NULL);
                     licznik_martwych_barier++;
                 }
                 numer_bariery++;
@@ -126,7 +117,6 @@ void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe
             dane_barier_poziomych[i].tablica_barier_martwych[j] = bariery_martwe[j];
         }
         dane_barier_poziomych[i].potoki = potoki;
-//        printf("%d", dane_barier_poziomych[i].numer_w_tablicy);
         
         g_signal_connect(G_OBJECT(bariery_poziome[i]), "button_press_event", G_CALLBACK(stawianie_bariery_poziomej), (gpointer)&dane_barier_poziomych[i]);
     }
@@ -145,7 +135,6 @@ void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe
             dane_barier_pionowych[i].tablica_barier_martwych[j] = bariery_martwe[j];
         }
         dane_barier_pionowych[i].potoki = potoki;
-        //        printf("%d", dane_barier_poziomych[i].numer_w_tablicy);
         
         g_signal_connect(G_OBJECT(bariery_pionowe[i]), "button_press_event", G_CALLBACK(stawianie_bariery_pionowej), (gpointer)&dane_barier_pionowych[i]);
     }

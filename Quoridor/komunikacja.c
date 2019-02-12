@@ -44,11 +44,12 @@ gboolean odczytaj_wiadmosc(gpointer data)
     gchar wejscie[10];
     if(getStringFromPipe(potoki, wejscie, 10))
     {
-        printf("%s", wejscie);
+//        printf("%s", wejscie);
         
         if(wejscie[0] == 'z')
         {
             przegrana();
+            moj_ruch = false;
         }
         
         if(wejscie[0] == 'r')
@@ -57,7 +58,8 @@ gboolean odczytaj_wiadmosc(gpointer data)
             int wsp_y = 8 - (wejscie[4] - '0');
 
             ruch_przeciwnika(wsp_x, wsp_y);
-            printf("%d %d", wsp_x, wsp_y);
+//            printf("%d %d", wsp_x, wsp_y);
+            moj_ruch = true;
         }
         
         if(wejscie[0] == 'b')
@@ -68,8 +70,9 @@ gboolean odczytaj_wiadmosc(gpointer data)
             
             
             przeciwnik_polozyl_bariere(numer_bariery, (wejscie[5] - '0'));
+            moj_ruch = true;
         }
-        moj_ruch = true;
+        
     }
     return TRUE;
 }

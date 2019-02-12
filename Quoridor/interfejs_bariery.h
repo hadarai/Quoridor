@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "gtk/gtk.h"
 #include "interfejs_przygotowanie.h"
+#include "mechanika_grafu.h" //WAZNE
 #include "fifo.h"
 #include "komunikacja.h"
 

@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42CF58FE21E3B5040074C509 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CF58FD21E3B5040074C509 /* main.c */; };
+		42853F0421F91A230045E2DA /* interfejs_bariery.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853EF621F91A230045E2DA /* interfejs_bariery.c */; };
+		42853F0521F91A230045E2DA /* komunikacja.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853EF821F91A230045E2DA /* komunikacja.c */; };
+		42853F0621F91A230045E2DA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853EF921F91A230045E2DA /* main.c */; };
+		42853F0721F91A230045E2DA /* interfejs_ruch.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853EFA21F91A230045E2DA /* interfejs_ruch.c */; };
+		42853F0821F91A230045E2DA /* mechanika_grafu.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853F0021F91A230045E2DA /* mechanika_grafu.c */; };
+		42853F0921F91A230045E2DA /* interfejs_przygotowanie.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853F0121F91A230045E2DA /* interfejs_przygotowanie.c */; };
+		42853F0A21F91A230045E2DA /* fifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 42853F0321F91A230045E2DA /* fifo.c */; };
+		42B6C43B22122614001FE25A /* koniec.c in Sources */ = {isa = PBXBuildFile; fileRef = 42B6C43A22122614001FE25A /* koniec.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +30,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		42853EF621F91A230045E2DA /* interfejs_bariery.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = interfejs_bariery.c; sourceTree = "<group>"; };
+		42853EF721F91A230045E2DA /* interfejs_ruch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interfejs_ruch.h; sourceTree = "<group>"; };
+		42853EF821F91A230045E2DA /* komunikacja.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = komunikacja.c; sourceTree = "<group>"; };
+		42853EF921F91A230045E2DA /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		42853EFA21F91A230045E2DA /* interfejs_ruch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = interfejs_ruch.c; sourceTree = "<group>"; };
+		42853EFC21F91A230045E2DA /* interfejs_bariery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interfejs_bariery.h; sourceTree = "<group>"; };
+		42853EFD21F91A230045E2DA /* mechanika_grafu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mechanika_grafu.h; sourceTree = "<group>"; };
+		42853EFE21F91A230045E2DA /* fifo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fifo.h; sourceTree = "<group>"; };
+		42853EFF21F91A230045E2DA /* interfejs_przygotowanie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interfejs_przygotowanie.h; sourceTree = "<group>"; };
+		42853F0021F91A230045E2DA /* mechanika_grafu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mechanika_grafu.c; sourceTree = "<group>"; };
+		42853F0121F91A230045E2DA /* interfejs_przygotowanie.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = interfejs_przygotowanie.c; sourceTree = "<group>"; };
+		42853F0221F91A230045E2DA /* komunikacja.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = komunikacja.h; sourceTree = "<group>"; };
+		42853F0321F91A230045E2DA /* fifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fifo.c; sourceTree = "<group>"; };
+		42B6C43922122614001FE25A /* koniec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = koniec.h; sourceTree = "<group>"; };
+		42B6C43A22122614001FE25A /* koniec.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = koniec.c; sourceTree = "<group>"; };
 		42CF58FA21E3B5040074C509 /* Quoridor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Quoridor; sourceTree = BUILT_PRODUCTS_DIR; };
-		42CF58FD21E3B5040074C509 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +59,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42853F0B21F91A640045E2DA /* interfejs */ = {
+			isa = PBXGroup;
+			children = (
+				42853EFC21F91A230045E2DA /* interfejs_bariery.h */,
+				42853EF621F91A230045E2DA /* interfejs_bariery.c */,
+				42853EFF21F91A230045E2DA /* interfejs_przygotowanie.h */,
+				42853F0121F91A230045E2DA /* interfejs_przygotowanie.c */,
+				42853EF721F91A230045E2DA /* interfejs_ruch.h */,
+				42853EFA21F91A230045E2DA /* interfejs_ruch.c */,
+			);
+			name = interfejs;
+			sourceTree = "<group>";
+		};
+		42853F0D21F91C5C0045E2DA /* fifo */ = {
+			isa = PBXGroup;
+			children = (
+				42853EFE21F91A230045E2DA /* fifo.h */,
+				42853F0321F91A230045E2DA /* fifo.c */,
+			);
+			name = fifo;
+			sourceTree = "<group>";
+		};
 		42CF58F121E3B5040074C509 = {
 			isa = PBXGroup;
 			children = (
@@ -57,7 +100,15 @@
 		42CF58FC21E3B5040074C509 /* Quoridor */ = {
 			isa = PBXGroup;
 			children = (
-				42CF58FD21E3B5040074C509 /* main.c */,
+				42853F0D21F91C5C0045E2DA /* fifo */,
+				42853EF921F91A230045E2DA /* main.c */,
+				42853EFD21F91A230045E2DA /* mechanika_grafu.h */,
+				42853F0021F91A230045E2DA /* mechanika_grafu.c */,
+				42853F0221F91A230045E2DA /* komunikacja.h */,
+				42853EF821F91A230045E2DA /* komunikacja.c */,
+				42853F0B21F91A640045E2DA /* interfejs */,
+				42B6C43922122614001FE25A /* koniec.h */,
+				42B6C43A22122614001FE25A /* koniec.c */,
 			);
 			path = Quoridor;
 			sourceTree = "<group>";
@@ -118,7 +169,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42CF58FE21E3B5040074C509 /* main.c in Sources */,
+				42853F0721F91A230045E2DA /* interfejs_ruch.c in Sources */,
+				42853F0421F91A230045E2DA /* interfejs_bariery.c in Sources */,
+				42B6C43B22122614001FE25A /* koniec.c in Sources */,
+				42853F0821F91A230045E2DA /* mechanika_grafu.c in Sources */,
+				42853F0A21F91A230045E2DA /* fifo.c in Sources */,
+				42853F0521F91A230045E2DA /* komunikacja.c in Sources */,
+				42853F0621F91A230045E2DA /* main.c in Sources */,
+				42853F0921F91A230045E2DA /* interfejs_przygotowanie.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +297,67 @@
 		42CF590221E3B5040074C509 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0/gtk",
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0",
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0",
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0/gtk",
+				);
+				OTHER_CFLAGS = (
+					"-std=c11",
+					"-Wall",
+					"-Wno-unused-parameter",
+					"-D_REENTRANT",
+					"-I/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0",
+					"-I/usr/local/Cellar/glib/2.58.2/include/gio-unix-2.0/",
+					"-I/usr/local/Cellar/cairo/1.16.0/include/cairo",
+					"-I/usr/local/Cellar/libepoxy/1.5.3/include",
+					"-I/usr/local/Cellar/pango/1.42.4/include/pango-1.0",
+					"-I/usr/local/Cellar/harfbuzz/2.3.0/include/harfbuzz",
+					"-I/usr/local/Cellar/graphite2/1.3.13/include",
+					"-I/usr/local/Cellar/pango/1.42.4/include/pango-1.0",
+					"-I/usr/local/Cellar/fribidi/1.0.5/include/fribidi",
+					"-I/usr/local/Cellar/atk/2.30.0/include/atk-1.0",
+					"-I/usr/local/Cellar/cairo/1.16.0/include/cairo",
+					"-I/usr/local/Cellar/pixman/0.36.0/include/pixman-1",
+					"-I/usr/local/Cellar/fontconfig/2.13.1/include",
+					"-I/usr/local/opt/freetype/include/freetype2",
+					"-I/usr/local/Cellar/libpng/1.6.36/include/libpng16",
+					"-I/usr/local/Cellar/gdk-pixbuf/2.38.0/include/gdk-pixbuf-2.0",
+					"-I/usr/local/Cellar/glib/2.58.2/include/glib-2.0",
+					"-I/usr/local/Cellar/glib/2.58.2/lib/glib-2.0/include",
+					"-I/usr/local/opt/gettext/include",
+					"-I/usr/local/Cellar/pcre/8.42/include",
+				);
+				OTHER_LDFLAGS = (
+					"-L/usr/local/Cellar/gtk+3/3.24.2_1/lib",
+					"-L/usr/local/Cellar/pango/1.42.4/lib",
+					"-L/usr/local/Cellar/atk/2.30.0/lib",
+					"-L/usr/local/Cellar/cairo/1.16.0/lib",
+					"-L/usr/local/Cellar/gdk-pixbuf/2.38.0/lib",
+					"-L/usr/local/Cellar/glib/2.58.2/lib",
+					"-L/usr/local/opt/gettext/lib",
+					"-lgtk-3",
+					"-lgdk-3",
+					"-lpangocairo-1.0",
+					"-lpango-1.0",
+					"-latk-1.0",
+					"-lcairo-gobject",
+					"-lcairo",
+					"-lgdk_pixbuf-2.0",
+					"-lgio-2.0",
+					"-lgobject-2.0",
+					"-lglib-2.0",
+					"-lintl",
+					"-Wl,-framework",
+					"-Wl,CoreFoundation",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,7 +365,67 @@
 		42CF590321E3B5040074C509 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0/gtk",
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0",
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0",
+					"/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0/gtk",
+				);
+				OTHER_CFLAGS = (
+					"-std=c11",
+					"-Wall",
+					"-Wno-unused-parameter",
+					"-D_REENTRANT",
+					"-I/usr/local/Cellar/gtk+3/3.24.2_1/include/gtk-3.0",
+					"-I/usr/local/Cellar/glib/2.58.2/include/gio-unix-2.0/",
+					"-I/usr/local/Cellar/cairo/1.16.0/include/cairo",
+					"-I/usr/local/Cellar/libepoxy/1.5.3/include",
+					"-I/usr/local/Cellar/pango/1.42.4/include/pango-1.0",
+					"-I/usr/local/Cellar/harfbuzz/2.3.0/include/harfbuzz",
+					"-I/usr/local/Cellar/graphite2/1.3.13/include",
+					"-I/usr/local/Cellar/pango/1.42.4/include/pango-1.0",
+					"-I/usr/local/Cellar/fribidi/1.0.5/include/fribidi",
+					"-I/usr/local/Cellar/atk/2.30.0/include/atk-1.0",
+					"-I/usr/local/Cellar/cairo/1.16.0/include/cairo",
+					"-I/usr/local/Cellar/pixman/0.36.0/include/pixman-1",
+					"-I/usr/local/Cellar/fontconfig/2.13.1/include",
+					"-I/usr/local/opt/freetype/include/freetype2",
+					"-I/usr/local/Cellar/libpng/1.6.36/include/libpng16",
+					"-I/usr/local/Cellar/gdk-pixbuf/2.38.0/include/gdk-pixbuf-2.0",
+					"-I/usr/local/Cellar/glib/2.58.2/include/glib-2.0",
+					"-I/usr/local/Cellar/glib/2.58.2/lib/glib-2.0/include",
+					"-I/usr/local/opt/gettext/include",
+					"-I/usr/local/Cellar/pcre/8.42/include",
+				);
+				OTHER_LDFLAGS = (
+					"-L/usr/local/Cellar/gtk+3/3.24.2_1/lib",
+					"-L/usr/local/Cellar/pango/1.42.4/lib",
+					"-L/usr/local/Cellar/atk/2.30.0/lib",
+					"-L/usr/local/Cellar/cairo/1.16.0/lib",
+					"-L/usr/local/Cellar/gdk-pixbuf/2.38.0/lib",
+					"-L/usr/local/Cellar/glib/2.58.2/lib",
+					"-L/usr/local/opt/gettext/lib",
+					"-lgtk-3",
+					"-lgdk-3",
+					"-lpangocairo-1.0",
+					"-lpango-1.0",
+					"-latk-1.0",
+					"-lcairo-gobject",
+					"-lcairo",
+					"-lgdk_pixbuf-2.0",
+					"-lgio-2.0",
+					"-lgobject-2.0",
+					"-lglib-2.0",
+					"-lintl",
+					"-Wl,-framework",
+					"-Wl,CoreFoundation",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

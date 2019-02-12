@@ -12,11 +12,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "gtk/gtk.h"
+#include "interfejs_ruch.h"
 
 void uzupelnij_graf(bool graf[][81]);
 
 bool czy_sasiaduja(int x, int y);
-//uzupelnij_graf(graf_polaczen_pol);
 
 bool czy_moge_przejsc_na_grafie(int x_gracza, int y_gracza, int x_dokad, int y_dokad);
 
@@ -29,12 +29,12 @@ void przywroc_polaczenie_poziome(int numer_bariery_poziomej);
 bool czy_moge_postawic_bariere_poziomo(int numer_bariery_poziomej);
 bool czy_moge_postawic_bariere_pionowo(int numer_bariery_pionowej);
 
-bool DFS(void);
+bool DFS(int wierzcholek_startowy, int rzad_koncowy);
 
 void miedzy_kim_jestes_pion(int numer_bariery);
 void miedzy_kim_jestes_poziom(int numer_bariery);
 
 
-void wypisz_graf(bool graf[][81]);
+void wypisz_graf(void);
 
 #endif /* mechanika_h */
