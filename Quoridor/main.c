@@ -26,7 +26,7 @@
 #define MAKS_DL_TEKSTU 100
 
 GtkWidget *okno_gry;
-PipesPtr potoki;
+pipes_pointer potoki;
 static char *moj_id, *twoj_id;
 char wiadomosc[10];
 bool przegralem = false;
@@ -118,11 +118,11 @@ int main(int argc, char *argv[])
 
 void zakoncz_dzialanie(GtkWidget *widget, gpointer data)
 {
-    closePipes(potoki);
+    close_pipes(potoki);
     gtk_main_quit();
 }
 
-void pokazBlad(char *komunikat)
+void show_error(char *komunikat)
 {
     GtkWidget *dialog;
     dialog = gtk_message_dialog_new(GTK_WINDOW(okno_gry), GTK_DIALOG_DESTROY_WITH_PARENT,

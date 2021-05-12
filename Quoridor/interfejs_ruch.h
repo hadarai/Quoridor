@@ -29,7 +29,7 @@ struct pozycja_do_ruchu
     int x;
     int y;
     GtkWidget *tablica[9][9];
-    PipesPtr potoki;
+    pipes_pointer potoki;
 };
 
 void ruch(GtkWidget *widget, struct pozycja_do_ruchu *pozycja);

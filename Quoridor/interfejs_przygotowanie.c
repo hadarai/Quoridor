@@ -9,7 +9,7 @@
 #include "interfejs_przygotowanie.h"
 extern struct dane_bariery dane_barier_poziomych[];
 
-void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_pionowe[], GtkWidget *bariery_poziome[], GtkWidget *bariery_martwe[], GtkWidget *siatka_okna, PipesPtr potoki)
+void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_pionowe[], GtkWidget *bariery_poziome[], GtkWidget *bariery_martwe[], GtkWidget *siatka_okna, pipes_pointer potoki)
 {
     unsigned int numer_bariery = 0;
     unsigned int licznik_pionowych_barier = 0, licznik_poziomych_barier = 0, licznik_martwych_barier = 0;
@@ -72,7 +72,7 @@ bool czy_bariera_martwa(int numer)
     return (numer % 25 >= 8 && ((numer % 25) % 2 == 1));
 }
 
-void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], PipesPtr potoki)
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], pipes_pointer potoki)
 {
     extern struct pozycja_do_ruchu pozycje_guzikow[9][9];
     for (int i_wiersz_y = 0; i_wiersz_y < 9; i_wiersz_y++)
@@ -94,7 +94,7 @@ void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], PipesPtr potoki)
     }
 }
 
-void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[], GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[], PipesPtr potoki)
+void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[], GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[], pipes_pointer potoki)
 {
 
     extern const unsigned short int ilosc_barier_pionowych;

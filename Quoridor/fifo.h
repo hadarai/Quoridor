@@ -1,8 +1,8 @@
 #include <stdbool.h>
 
-typedef struct pipes *PipesPtr;
+typedef struct pipes *pipes_pointer;
 
-PipesPtr initPipes(int argc, char *argv[]);
-void sendStringToPipe(PipesPtr channel, const char *data);
-bool getStringFromPipe(PipesPtr channel, char *buffer, size_t size);
-void closePipes(PipesPtr channel);
+pipes_pointer init_pipes(int argc, char *argv[]);
+void send_string_to_pipe(pipes_pointer channel, const char *data);
+bool get_string_from_pipe(pipes_pointer channel, char *buffer, size_t size);
+void close_pipes(pipes_pointer channel);

@@ -14,18 +14,18 @@ struct pipes
 };
 
 int fileno(FILE *file);
-void pokazBlad(char *komunikat);
-static FILE *openOutPipe(char *name);
-static FILE *openInPipe(char *name);
+void show_error(char *message);
+static FILE *open_out_pipe(char *name);
+static FILE *open_in_pipe(char *name);
 
-void closePipes(PipesPtr pipes)
+void close_pipes(pipes_pointer pipes)
 {
     fclose(pipes->fifo_in);
     fclose(pipes->fifo_out);
     free(pipes);
 }
 
-PipesPtr initPipes(int argc, char *argv[])
+pipes_pointer init_pipes(int argc, char *argv[])
 {
     if (argc < 2 || (argv[1][0] != 'A' && argv[1][0] != 'B') || argv[1][1] != '\0')
     {
@@ -35,7 +35,7 @@ PipesPtr initPipes(int argc, char *argv[])
         fprintf(stderr, "Fifo queues AtoB and BtoA created\n");
         return NULL;
     }
-    PipesPtr pipes = (PipesPtr)malloc(sizeof(struct pipes));
+    pipes_pointer pipes = (pipes_pointer)malloc(sizeof(struct pipes));
     if (pipes == NULL)
     {
         fprintf(stderr, "Memory allocation error\n");
@@ -43,25 +43,25 @@ PipesPtr initPipes(int argc, char *argv[])
     else
     {
         pipes->isA = (argv[1][0] == 'A');
-        pipes->fifo_out = openOutPipe(pipes->isA ? "AtoB" : "BtoA");
-        pipes->fifo_in = openInPipe(pipes->isA ? "BtoA" : "AtoB");
+        pipes->fifo_out = open_out_pipe(pipes->isA ? "AtoB" : "BtoA");
+        pipes->fifo_in = open_in_pipe(pipes->isA ? "BtoA" : "AtoB");
     }
     return pipes;
 }
 
-static FILE *openOutPipe(char *name)
+static FILE *open_out_pipe(char *name)
 {
     mkfifo(name, 0664);
     FILE *pipe = fopen(name, "w+");
     if (pipe == NULL)
     {
-        pokazBlad("Error in creating output pipe");
+        show_error("Error in creating output pipe");
         exit(-1);
     }
     return pipe;
 }
 
-static FILE *openInPipe(char *name)
+static FILE *open_in_pipe(char *name)
 {
     FILE *pipe = fopen(name, "r+");
     if (pipe == NULL)
@@ -71,7 +71,7 @@ static FILE *openInPipe(char *name)
     }
     if (pipe == NULL)
     {
-        pokazBlad("Error in creating input pipe");
+        show_error("Error in creating input pipe");
         exit(-1);
     }
     int flags, fd;
@@ -81,18 +81,18 @@ static FILE *openInPipe(char *name)
     return pipe;
 }
 
-void sendStringToPipe(PipesPtr pipes, const char *data)
+void send_string_to_pipe(pipes_pointer pipes, const char *data)
 {
     int result = fprintf(pipes->fifo_out, "%s", data); // problem
     fflush(pipes->fifo_out);
     if (result == 0)
-        pokazBlad("Failed to send data");
+        show_error("Failed to send data");
 }
-bool get_strings_from_pipe(PipesPtr pipes, char *buffer, size_t size)
+bool get_strings_from_pipe(pipes_pointer pipes, char *buffer, size_t size)
 {
     char = fgets(buffer, (int)size, pipes->fifo_in)
 }
-bool getStringFromPipe(PipesPtr pipes, char *buffer, size_t size)
+bool get_string_from_pipe(pipes_pointer pipes, char *buffer, size_t size)
 {
     char *result = fgets(buffer, (int)size, pipes->fifo_in);
     fflush(pipes->fifo_in);

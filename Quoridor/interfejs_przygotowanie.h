@@ -23,7 +23,7 @@ struct dane_bariery
     int numer_w_tablicy;
     GtkWidget *tablica_barier[81];
     GtkWidget *tablica_barier_martwych[64];
-    PipesPtr potoki;
+    pipes_pointer potoki;
 };
 
 bool czy_niepuste_pole(unsigned int i_wiersz, unsigned int j_kolumna);
@@ -35,9 +35,9 @@ void rysowanie_interfejsu(
     GtkWidget *bariery_poziome[],
     GtkWidget *bariery_martwe[],
     GtkWidget *siatka_okna,
-    PipesPtr potoki);
+    pipes_pointer potoki);
 
-void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], PipesPtr potoki);
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], pipes_pointer potoki);
 
 void podlaczanie_barier(
     GtkWidget *bariery_poziome[],
@@ -45,7 +45,7 @@ void podlaczanie_barier(
     GtkWidget *bariery_martwe[],
     struct dane_bariery dane_barier_poziomych[],
     struct dane_bariery dane_barier_pionowych[],
-    PipesPtr potoki);
+    pipes_pointer potoki);
 
 bool czy_bariera_pionowa(int numer);
 bool czy_bariera_pozioma(int numer);
