@@ -34,7 +34,6 @@ bool DFS(int wierzcholek_startowy, int rzad_koncowy);
 void miedzy_kim_jestes_pion(int numer_bariery);
 void miedzy_kim_jestes_poziom(int numer_bariery);
 
-
 void wypisz_graf(void);
 
 #endif /* mechanika_h */

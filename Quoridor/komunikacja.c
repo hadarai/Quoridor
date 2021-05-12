@@ -18,7 +18,7 @@ void wyslij_ruch(int x_gracza, int y_gracza, PipesPtr potoki)
 
 void wyslij_bariere(int numer_bariery, int czy_pion, PipesPtr potoki)
 {
-    if(numer_bariery < 10)
+    if (numer_bariery < 10)
     {
         sprintf(wiadomosc, "b 0%d %d", numer_bariery, czy_pion);
     }
@@ -42,37 +42,32 @@ gboolean odczytaj_wiadmosc(gpointer data)
     extern bool moj_ruch;
     extern struct pozycja pozycja_przeciwnika;
     gchar wejscie[10];
-    if(getStringFromPipe(potoki, wejscie, 10))
+    if (getStringFromPipe(potoki, wejscie, 10))
     {
-//        printf("%s", wejscie);
-        
-        if(wejscie[0] == 'z')
+        if (wejscie[0] == 'z')
         {
             przegrana();
             moj_ruch = false;
         }
-        
-        if(wejscie[0] == 'r')
+
+        if (wejscie[0] == 'r')
         {
             int wsp_x = 8 - (wejscie[2] - '0');
             int wsp_y = 8 - (wejscie[4] - '0');
 
             ruch_przeciwnika(wsp_x, wsp_y);
-//            printf("%d %d", wsp_x, wsp_y);
             moj_ruch = true;
         }
-        
-        if(wejscie[0] == 'b')
+
+        if (wejscie[0] == 'b')
         {
             int numer_bariery;
             numer_bariery = ((wejscie[2] - '0') * 10);
             numer_bariery = numer_bariery + wejscie[3] - '0';
-            
-            
+
             przeciwnik_polozyl_bariere(numer_bariery, (wejscie[5] - '0'));
             moj_ruch = true;
         }
-        
     }
     return TRUE;
 }

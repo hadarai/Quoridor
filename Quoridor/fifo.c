@@ -6,46 +6,52 @@
 #include <fcntl.h>
 #include "fifo.h"
 
-struct pipes {
-    FILE *fifo_in, *fifo_out;
+struct pipes
+{
+    FILE *fifo_in;
+    FILE *fifo_out;
     int isA;
-} ;
+};
 
 int fileno(FILE *file);
 void pokazBlad(char *komunikat);
 static FILE *openOutPipe(char *name);
 static FILE *openInPipe(char *name);
 
-void closePipes(PipesPtr pipes) 
-{ 
-  fclose(pipes->fifo_in); 
-  fclose(pipes->fifo_out); 
-  free(pipes); 
+void closePipes(PipesPtr pipes)
+{
+    fclose(pipes->fifo_in);
+    fclose(pipes->fifo_out);
+    free(pipes);
 }
 
-PipesPtr initPipes(int argc,char *argv[])
+PipesPtr initPipes(int argc, char *argv[])
 {
     if (argc < 2 || (argv[1][0] != 'A' && argv[1][0] != 'B') || argv[1][1] != '\0')
     {
-        fprintf(stderr,"\nThis program should be called with the first argument: A or B\n\n");
-        mkfifo("AtoB",0664);
-        mkfifo("BtoA",0664);
-        fprintf(stderr,"Fifo queues AtoB and BtoA created\n");
+        fprintf(stderr, "\nThis program should be called with the first argument: A or B\n\n");
+        mkfifo("AtoB", 0664);
+        mkfifo("BtoA", 0664);
+        fprintf(stderr, "Fifo queues AtoB and BtoA created\n");
         return NULL;
     }
-    PipesPtr pipes=(PipesPtr)malloc(sizeof(struct pipes));
-    if (pipes == NULL) {
-        fprintf(stderr,"Memory allocation error\n");
-    } else {
-        pipes->isA=(argv[1][0] == 'A');
+    PipesPtr pipes = (PipesPtr)malloc(sizeof(struct pipes));
+    if (pipes == NULL)
+    {
+        fprintf(stderr, "Memory allocation error\n");
+    }
+    else
+    {
+        pipes->isA = (argv[1][0] == 'A');
         pipes->fifo_out = openOutPipe(pipes->isA ? "AtoB" : "BtoA");
         pipes->fifo_in = openInPipe(pipes->isA ? "BtoA" : "AtoB");
     }
     return pipes;
 }
 
-static FILE *openOutPipe(char *name) {
-    mkfifo(name,0664);
+static FILE *openOutPipe(char *name)
+{
+    mkfifo(name, 0664);
     FILE *pipe = fopen(name, "w+");
     if (pipe == NULL)
     {
@@ -55,10 +61,12 @@ static FILE *openOutPipe(char *name) {
     return pipe;
 }
 
-static FILE *openInPipe(char *name){
+static FILE *openInPipe(char *name)
+{
     FILE *pipe = fopen(name, "r+");
-    if (pipe == NULL) {
-        mkfifo(name,0664);
+    if (pipe == NULL)
+    {
+        mkfifo(name, 0664);
         pipe = fopen(name, "r+");
     }
     if (pipe == NULL)
@@ -75,15 +83,18 @@ static FILE *openInPipe(char *name){
 
 void sendStringToPipe(PipesPtr pipes, const char *data)
 {
-    int result = fprintf(pipes->fifo_out,"%s",data); // problem
+    int result = fprintf(pipes->fifo_out, "%s", data); // problem
     fflush(pipes->fifo_out);
     if (result == 0)
         pokazBlad("Failed to send data");
 }
-
+bool get_strings_from_pipe(PipesPtr pipes, char *buffer, size_t size)
+{
+    char = fgets(buffer, (int)size, pipes->fifo_in)
+}
 bool getStringFromPipe(PipesPtr pipes, char *buffer, size_t size)
 {
-    char *result = fgets(buffer,size,pipes->fifo_in);
+    char *result = fgets(buffer, (int)size, pipes->fifo_in);
     fflush(pipes->fifo_in);
     return result != NULL;
 }

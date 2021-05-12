@@ -53,11 +53,9 @@ struct pozycja_do_ruchu pozycje_guzikow[9][9];
 struct dane_bariery dane_barier_poziomych[72];
 struct dane_bariery dane_barier_pionowych[72];
 
-
-
 int main(int argc, char *argv[])
 {
-    
+
     if ((potoki = initPipes(argc, argv)) == NULL)
         return 1;
     if (argc == 2 && strcmp(argv[1], "A") == 0)
@@ -84,7 +82,7 @@ int main(int argc, char *argv[])
     {
         sprintf(naglowek, "Gracz Drugi");
     }
-    
+
     okno_gry = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(okno_gry), naglowek);
     g_signal_connect(G_OBJECT(okno_gry), "destroy", G_CALLBACK(zakoncz_dzialanie), NULL);
@@ -100,19 +98,19 @@ int main(int argc, char *argv[])
     pozycja_gracza.y = 8;
     pozycja_przeciwnika.x = 4;
     pozycja_przeciwnika.y = 0;
-    
+
     uzupelnij_graf(graf_polaczen_pol);
 
     rysowanie_interfejsu(guziki, bariery_pionowe, bariery_poziome, bariery_martwe, siatka_okna, potoki);
 
     podlaczanie_guzikow(guziki, potoki);
     podlaczanie_barier(bariery_poziome, bariery_pionowe, bariery_martwe, dane_barier_poziomych, dane_barier_pionowych, potoki);
-    
+
     wyswietl_przeciwnika(guziki, pozycja_przeciwnika.x, pozycja_przeciwnika.y);
     wyswietl_gracza(guziki, pozycja_gracza.x, pozycja_gracza.y);
 
     g_timeout_add(100, odczytaj_wiadmosc, potoki);
-    
+
     gtk_widget_show_all(okno_gry);
     gtk_main();
     return 0;

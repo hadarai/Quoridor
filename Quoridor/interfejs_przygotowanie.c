@@ -23,9 +23,8 @@ void rysowanie_interfejsu(GtkWidget *wszystkie_guziki[][9], GtkWidget *bariery_p
                 int x_guzika = j_kolumna_x / 2;
                 int y_guzika = i_wiersz_y / 2;
                 wszystkie_guziki[x_guzika][y_guzika] = gtk_button_new();
-                
+
                 gtk_grid_attach(GTK_GRID(siatka_okna), wszystkie_guziki[x_guzika][y_guzika], j_kolumna_x, i_wiersz_y, 1, 1);
-                
             }
             else
             {
@@ -73,7 +72,7 @@ bool czy_bariera_martwa(int numer)
     return (numer % 25 >= 8 && ((numer % 25) % 2 == 1));
 }
 
-void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9],PipesPtr potoki)
+void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9], PipesPtr potoki)
 {
     extern struct pozycja_do_ruchu pozycje_guzikow[9][9];
     for (int i_wiersz_y = 0; i_wiersz_y < 9; i_wiersz_y++)
@@ -95,50 +94,48 @@ void podlaczanie_guzikow(GtkWidget *wszystkie_guziki[][9],PipesPtr potoki)
     }
 }
 
-
-void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[],  GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[],  PipesPtr potoki)
+void podlaczanie_barier(GtkWidget *bariery_poziome[], GtkWidget *bariery_pionowe[], GtkWidget *bariery_martwe[], struct dane_bariery dane_barier_poziomych[], struct dane_bariery dane_barier_pionowych[], PipesPtr potoki)
 {
-    
+
     extern const unsigned short int ilosc_barier_pionowych;
     extern const unsigned short int ilosc_barier_poziomych;
     extern const unsigned short int ilosc_barier_martwych;
-    
+
     //poziome
     for (int i = 0; i < ilosc_barier_poziomych; i++)
     {
         dane_barier_poziomych[i].numer_w_tablicy = i;
-        
-        for(int j=0;j<ilosc_barier_poziomych;j++)
+
+        for (int j = 0; j < ilosc_barier_poziomych; j++)
         {
             dane_barier_poziomych[i].tablica_barier[j] = bariery_poziome[j];
         }
-        for(int j=0;j<ilosc_barier_martwych;j++)
+        for (int j = 0; j < ilosc_barier_martwych; j++)
         {
             dane_barier_poziomych[i].tablica_barier_martwych[j] = bariery_martwe[j];
         }
         dane_barier_poziomych[i].potoki = potoki;
-        
+
         g_signal_connect(G_OBJECT(bariery_poziome[i]), "button_press_event", G_CALLBACK(stawianie_bariery_poziomej), (gpointer)&dane_barier_poziomych[i]);
     }
-    
+
     //pionowe
     for (int i = 0; i < ilosc_barier_pionowych; i++)
     {
         dane_barier_pionowych[i].numer_w_tablicy = i;
-        
-        for(int j=0;j<ilosc_barier_pionowych;j++)
+
+        for (int j = 0; j < ilosc_barier_pionowych; j++)
         {
             dane_barier_pionowych[i].tablica_barier[j] = bariery_pionowe[j];
         }
-        for(int j=0;j<ilosc_barier_martwych;j++)
+        for (int j = 0; j < ilosc_barier_martwych; j++)
         {
             dane_barier_pionowych[i].tablica_barier_martwych[j] = bariery_martwe[j];
         }
         dane_barier_pionowych[i].potoki = potoki;
-        
+
         g_signal_connect(G_OBJECT(bariery_pionowe[i]), "button_press_event", G_CALLBACK(stawianie_bariery_pionowej), (gpointer)&dane_barier_pionowych[i]);
     }
-    
 }
 
 bool czy_niepuste_pole(unsigned int i_wiersz, unsigned int j_kolumna)
@@ -156,4 +153,3 @@ bool czy_klasc_guzik(unsigned int i_wiersz, unsigned int j_kolumna)
 {
     return (j_kolumna % 2 == 0 && i_wiersz % 2 == 0);
 }
-
